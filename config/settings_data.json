@@ -50,7 +50,7 @@
     "badge_sold_out_background_color": "{{ settings.color_palette.color2 }}",
     "badge_text_transform": "none",
     "primary_button_border_width": 0,
-    "button_border_radius_primary": 14,
+    "button_border_radius_primary": 0,
     "secondary_button_border_width": 1,
     "button_border_radius_secondary": 14,
     "cart_type": "drawer",
@@ -73,7 +73,7 @@
     "variant_swatch_radius": 32,
     "palette_variant_border": "{{ settings.color_palette.color3 }}",
     "variant_button_border_width": 1,
-    "variant_button_radius": 14,
+    "variant_button_radius": 0,
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
     "color_palette": {
@@ -163,8 +163,8 @@
   },
   "platform_customizations": {
     "custom_css": [
-      ".media-gallery--carousel slideshow-controls[thumbnails][pagination-position='center'] {justify-content: flex-start;}",
-      ".media-gallery--carousel slideshow-controls[thumbnails][pagination-position='center'] .slideshow-controls__thumbnails {margin-inline: 0 auto;}"
+      ".media-gallery--carousel slideshow-controls[thumbnails][pagination-position=\"center\"] {justify-content: flex-start;}",
+      ".media-gallery--carousel slideshow-controls[thumbnails][pagination-position=\"center\"] .slideshow-controls__thumbnails {margin-inline: 0 auto;}"
     ]
   }
 }
