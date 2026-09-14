@@ -160,5 +160,11 @@
         "color3": "#DFDFDF"
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".media-gallery--carousel slideshow-controls[thumbnails][pagination-position='center'] {justify-content: flex-start;}",
+      ".media-gallery--carousel slideshow-controls[thumbnails][pagination-position='center'] .slideshow-controls__thumbnails {margin-inline: 0 auto;}"
+    ]
   }
 }
