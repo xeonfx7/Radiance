@@ -165,7 +165,8 @@
   "platform_customizations": {
     "custom_css": [
       ".media-gallery--carousel slideshow-controls[thumbnails][pagination-position=\"center\"] {justify-content: flex-start;}",
-      ".media-gallery--carousel slideshow-controls[thumbnails][pagination-position=\"center\"] .slideshow-controls__thumbnails {margin-inline: 0 auto;}"
+      ".media-gallery--carousel slideshow-controls[thumbnails][pagination-position=\"center\"] .slideshow-controls__thumbnails {margin-inline: 0 auto;}",
+      "@media screen and (max-width: 749px) {header-component .header__column--right .search-action--hidden-on-menu {display: none; }}"
     ]
   }
 }
