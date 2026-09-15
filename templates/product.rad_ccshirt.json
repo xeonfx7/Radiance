@@ -283,6 +283,25 @@
               },
               "block_order": []
             },
+            "rad_ccshirt_after_cart": {
+              "type": "rad_ccshirt_after_cart",
+              "settings": {
+                "guarantee_text": "Less than 1% of customers use our money back guarantee.",
+                "shipping_text": "Free shipping $85+",
+                "secure_text": "Secure checkout",
+                "about_heading": "ABOUT THIS TEE",
+                "about_text": "<p>A soft spot for the slow lane. This Comfort Colors 1717 tee brings an easy, lived-in feel to slow hikes, snack stops, and days with no agenda.</p><ul><li>100% ring-spun cotton.</li><li>Heavier fabric, garment-dyed for soft color and a lived-in feel.</li><li>Relaxed unisex fit with room to take it easy.</li></ul>",
+                "care_heading": "KEEP IT LOOKING GOOD",
+                "care_items": "Machine wash cold, inside out.\nTumble dry low or hang dry.\nSkip the bleach and keep the iron off the print.",
+                "shipping_heading": "SHIPPING & RETURNS",
+                "shipping_body": "<p>Orders ship within 3-5 days. Allow another 3-5 days after dispatch for delivery. Orders over $85 qualify for free shipping.</p>",
+                "shipping_policy_link": "/policies/shipping-policy",
+                "refund_policy_link": "/policies/refund-policy",
+                "alt_text": "Also available in a lighter Softstyle tee",
+                "alt_link": ""
+              },
+              "blocks": {}
+            },
             "text_aEtTtq": {
               "type": "text",
               "name": "t:names.product_description",
@@ -315,6 +334,7 @@
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
+            "rad_ccshirt_after_cart",
             "text_aEtTtq"
           ]
         }
