@@ -79,7 +79,7 @@
     "content_for_index": [],
     "color_palette": {
       "background": "#ffffff",
-      "foreground": "#BB6854",
+      "foreground": "#000000",
       "color1": "#333333",
       "color2": "#eef1ea",
       "color3": "#dfdfdf"
