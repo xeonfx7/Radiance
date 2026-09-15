@@ -118,22 +118,6 @@
     </details>
   </div>
 
-  {% if block.settings.alt_text != blank %}
-    {% if block.settings.alt_link != blank %}
-      <a
-        class="rad_ccshirt_after_cart__alt_link"
-        href="{{ block.settings.alt_link }}"
-      >
-        <span>{{ block.settings.alt_text }}</span>
-        <span aria-hidden="true">›</span>
-      </a>
-    {% else %}
-      <div class="rad_ccshirt_after_cart__alt_link">
-        <span>{{ block.settings.alt_text }}</span>
-        <span aria-hidden="true">›</span>
-      </div>
-    {% endif %}
-  {% endif %}
 </div>
 
 {% stylesheet %}
@@ -260,17 +244,6 @@
     text-underline-offset: 0.15em;
   }
 
-  .rad_ccshirt_after_cart__alt_link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding-top: 6px;
-    color: rgb(var(--color-foreground-rgb) / 0.75);
-    font-size: 0.85rem;
-    text-decoration: none;
-  }
-
   @media screen and (max-width: 749px) {
     .rad_ccshirt_after_cart__meta {
       align-items: flex-start;
@@ -360,21 +333,6 @@
       "id": "refund_policy_link",
       "label": "Refund policy link"
     },
-    {
-      "type": "header",
-      "content": "Alternate product"
-    },
-    {
-      "type": "text",
-      "id": "alt_text",
-      "label": "Text",
-      "default": "Also available in a lighter Softstyle tee"
-    },
-    {
-      "type": "url",
-      "id": "alt_link",
-      "label": "Link"
-    }
   ],
   "presets": [
     {

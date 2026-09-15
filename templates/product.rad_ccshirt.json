@@ -186,6 +186,16 @@
                 "price_tVjtKg"
               ]
             },
+            "rad_ccshirt_meta": {
+              "type": "rad_ccshirt_meta",
+              "settings": {
+                "review_text": "4.8/5 - 2535 tee reviews",
+                "fabric_label": "Comfort Colors 1717",
+                "cotton_label": "100% cotton",
+                "fit_label": "Relaxed fit"
+              },
+              "blocks": {}
+            },
             "divider_VJhene": {
               "type": "_divider",
               "name": "t:names.divider",
@@ -296,9 +306,7 @@
                 "shipping_heading": "SHIPPING & RETURNS",
                 "shipping_body": "<p>Orders ship within 3-5 days. Allow another 3-5 days after dispatch for delivery. Orders over $85 qualify for free shipping.</p>",
                 "shipping_policy_link": "/policies/shipping-policy",
-                "refund_policy_link": "/policies/refund-policy",
-                "alt_text": "Also available in a lighter Softstyle tee",
-                "alt_link": ""
+                "refund_policy_link": "/policies/refund-policy"
               },
               "blocks": {}
             },
@@ -331,6 +339,7 @@
           },
           "block_order": [
             "group_icgrde",
+            "rad_ccshirt_meta",
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",

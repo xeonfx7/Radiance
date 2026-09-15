@@ -65,6 +65,7 @@ diff -u templates/product.json templates/product.rad_ccshirt.json
 The expected difference should mainly be:
 
 - the `rad_breadcrumbs` section
+- the `rad_ccshirt_meta` block
 - the `rad_ccshirt_after_cart` block
 - any other intentional `rad_` customization
 
@@ -74,6 +75,9 @@ After preview and theme check pass:
 
 ```bash
 git status --short
+git add AGENTS.md
+git add README.dev.md
+git add blocks/rad_ccshirt_meta.liquid
 git add blocks/rad_ccshirt_after_cart.liquid
 git add sections/rad_breadcrumbs.liquid
 git add snippets/rad_breadcrumbs.liquid

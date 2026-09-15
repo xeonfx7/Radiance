@@ -1,0 +1,199 @@
+{% liquid
+  assign review_text = block.settings.review_text | default: '4.8/5 - 2535 tee reviews'
+  assign fabric_label = block.settings.fabric_label | default: 'Comfort Colors 1717'
+  assign cotton_label = block.settings.cotton_label | default: '100% cotton'
+  assign fit_label = block.settings.fit_label | default: 'Relaxed fit'
+%}
+
+<div
+  class="rad_ccshirt_meta"
+  {{ block.shopify_attributes }}
+>
+  <div
+    class="rad_ccshirt_meta__reviews"
+    aria-label="{{ review_text | escape }}"
+  >
+    <span
+      class="rad_ccshirt_meta__stars"
+      aria-hidden="true"
+    >
+      {% for star in (1..5) %}
+        <svg
+          viewBox="0 0 32 32"
+          focusable="false"
+        >
+          <path d="M31.547 12a.848.848 0 0 0-.677-.577l-9.427-1.376-4.224-8.532a.847.847 0 0 0-1.516 0l-4.218 8.534-9.427 1.355a.847.847 0 0 0-.467 1.467l6.823 6.664-1.612 9.375a.847.847 0 0 0 1.23.893l8.428-4.434 8.432 4.432a.847.847 0 0 0 1.229-.894l-1.615-9.373 6.822-6.665a.845.845 0 0 0 .214-.869Z"/>
+        </svg>
+      {% endfor %}
+    </span>
+    <span class="rad_ccshirt_meta__review_text">{{ review_text }}</span>
+  </div>
+
+  <div class="rad_ccshirt_meta__features">
+    <div class="rad_ccshirt_meta__feature">
+      <span
+        class="rad_ccshirt_meta__icon"
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          focusable="false"
+        >
+          <path d="M9 4.5h6l1.4 2.4 2.6 1.2-1.35 3.4-1.65-.65v8.65H8v-8.65l-1.65.65L5 8.1l2.6-1.2L9 4.5Z" stroke="currentColor" stroke-width="1.45" stroke-linejoin="round"/>
+          <path d="M10.15 4.5c.35 1.1 1.1 1.75 1.85 1.75s1.5-.65 1.85-1.75" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>{{ fabric_label }}</span>
+    </div>
+
+    <div class="rad_ccshirt_meta__feature">
+      <span
+        class="rad_ccshirt_meta__icon"
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          focusable="false"
+        >
+          <path d="M12 4.75c3.6 2.65 5.4 5.25 5.4 7.8A5.4 5.4 0 0 1 6.6 12.55c0-2.55 1.8-5.15 5.4-7.8Z" stroke="currentColor" stroke-width="1.45" stroke-linejoin="round"/>
+          <path d="M9 13.4c.75 1 1.7 1.5 3 1.5s2.25-.5 3-1.5" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>{{ cotton_label }}</span>
+    </div>
+
+    <div class="rad_ccshirt_meta__feature">
+      <span
+        class="rad_ccshirt_meta__icon"
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          focusable="false"
+        >
+          <path d="M5 12h14" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"/>
+          <path d="m8 8-4 4 4 4M16 8l4 4-4 4" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>{{ fit_label }}</span>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .rad_ccshirt_meta {
+    display: grid;
+    gap: 12px;
+    width: 100%;
+    color: var(--color-foreground);
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+
+  .rad_ccshirt_meta__reviews,
+  .rad_ccshirt_meta__features,
+  .rad_ccshirt_meta__feature {
+    display: flex;
+    align-items: center;
+  }
+
+  .rad_ccshirt_meta__reviews {
+    gap: 8px;
+  }
+
+  .rad_ccshirt_meta__stars {
+    display: inline-flex;
+    gap: 2px;
+    color: #f2b51d;
+  }
+
+  .rad_ccshirt_meta__stars svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  .rad_ccshirt_meta__review_text {
+    white-space: nowrap;
+  }
+
+  .rad_ccshirt_meta__features {
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .rad_ccshirt_meta__feature {
+    gap: 6px;
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .rad_ccshirt_meta__icon {
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+  }
+
+  .rad_ccshirt_meta__icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media screen and (max-width: 749px) {
+    .rad_ccshirt_meta__features {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .rad_ccshirt_meta__reviews {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 6px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RAD CC Shirt meta",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "review_text",
+      "label": "Review text",
+      "default": "4.8/5 - 2535 tee reviews"
+    },
+    {
+      "type": "text",
+      "id": "fabric_label",
+      "label": "Fabric label",
+      "default": "Comfort Colors 1717"
+    },
+    {
+      "type": "text",
+      "id": "cotton_label",
+      "label": "Cotton label",
+      "default": "100% cotton"
+    },
+    {
+      "type": "text",
+      "id": "fit_label",
+      "label": "Fit label",
+      "default": "Relaxed fit"
+    }
+  ],
+  "presets": [
+    {
+      "name": "RAD CC Shirt meta"
+    }
+  ]
+}
+{% endschema %}
