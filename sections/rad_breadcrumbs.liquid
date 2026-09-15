@@ -1,0 +1,29 @@
+{% liquid
+  assign section_settings = section.settings
+
+  if request.page_type == 'product'
+    render 'rad_breadcrumbs', product: product, show_collection: section_settings.show_collection
+  endif
+%}
+
+{% schema %}
+{
+  "name": "RAD Breadcrumbs",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_collection",
+      "label": "Show collection",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "RAD Breadcrumbs"
+    }
+  ]
+}
+{% endschema %}

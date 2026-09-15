@@ -1,0 +1,137 @@
+{% doc %}
+  Renders product breadcrumbs with structured data.
+
+  @param {product} product - Product object used for the final breadcrumb item.
+  @param {boolean} [show_collection] - Whether to show a collection breadcrumb when available.
+{% enddoc %}
+
+{%- liquid
+  assign breadcrumb_collection = collection
+
+  if breadcrumb_collection == blank and product.collections.size > 0
+    assign breadcrumb_collection = product.collections | first
+  endif
+
+  unless show_collection
+    assign breadcrumb_collection = blank
+  endunless
+
+  assign home_url = request.origin | append: routes.root_url
+  assign product_url = request.origin | append: product.url
+
+  if breadcrumb_collection != blank
+    assign collection_url = request.origin | append: breadcrumb_collection.url
+  endif
+-%}
+
+<nav
+  class="rad_breadcrumbs"
+  aria-label="Breadcrumb"
+>
+  <ol class="rad_breadcrumbs__list list-unstyled">
+    <li class="rad_breadcrumbs__item">
+      <a
+        class="rad_breadcrumbs__link"
+        href="{{ routes.root_url }}"
+      >
+        {{- 'Home' -}}
+      </a>
+    </li>
+
+    {%- if breadcrumb_collection != blank -%}
+      <li class="rad_breadcrumbs__item">
+        <a
+          class="rad_breadcrumbs__link"
+          href="{{ breadcrumb_collection.url }}"
+        >
+          {{- breadcrumb_collection.title | escape -}}
+        </a>
+      </li>
+    {%- endif -%}
+
+    <li
+      class="rad_breadcrumbs__item rad_breadcrumbs__item--current"
+      aria-current="page"
+    >
+      {{- product.title | escape -}}
+    </li>
+  </ol>
+</nav>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": {{ home_url | json }}
+      }{% if breadcrumb_collection != blank %},
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ breadcrumb_collection.title | json }},
+        "item": {{ collection_url | json }}
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ product.title | json }},
+        "item": {{ product_url | json }}
+      }{% else %},
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ product.title | json }},
+        "item": {{ product_url | json }}
+      }{% endif %}
+    ]
+  }
+</script>
+
+{% stylesheet %}
+  .rad_breadcrumbs {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: var(--padding-md) var(--page-margin);
+    font-family: var(--font-paragraph--family);
+    font-size: var(--font-size--sm);
+    line-height: var(--line-height--body-normal);
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-80));
+  }
+
+  .rad_breadcrumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--gap-xs);
+    margin: 0;
+    padding: 0;
+  }
+
+  .rad_breadcrumbs__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-xs);
+  }
+
+  .rad_breadcrumbs__item:not(:first-child)::before {
+    content: "/";
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-50));
+  }
+
+  .rad_breadcrumbs__link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .rad_breadcrumbs__link:hover {
+    text-decoration: underline;
+  }
+
+  .rad_breadcrumbs__item--current {
+    color: var(--color-foreground);
+  }
+{% endstylesheet %}
