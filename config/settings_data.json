@@ -79,10 +79,10 @@
     "content_for_index": [],
     "color_palette": {
       "background": "#ffffff",
-      "foreground": "#000000",
+      "foreground": "#BB6854",
       "color1": "#333333",
-      "color2": "#EEF1EA",
-      "color3": "#DFDFDF"
+      "color2": "#eef1ea",
+      "color3": "#dfdfdf"
     }
   },
   "presets": {
