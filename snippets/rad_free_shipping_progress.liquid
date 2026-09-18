@@ -1,0 +1,92 @@
+{%- doc -%}
+  Shows free-shipping progress in the cart drawer.
+
+  Uses the cart total and the `rad_free_shipping_threshold` Cart theme setting.
+{%- enddoc -%}
+
+{% liquid
+  assign free_shipping_threshold = settings.rad_free_shipping_threshold | times: 100
+
+  if free_shipping_threshold > 0
+    assign free_shipping_remaining = free_shipping_threshold | minus: cart.total_price
+    assign free_shipping_progress = cart.total_price | times: 100 | divided_by: free_shipping_threshold
+
+    if free_shipping_progress > 100
+      assign free_shipping_progress = 100
+    endif
+  endif
+%}
+
+{% if cart.empty? == false and free_shipping_threshold > 0 %}
+  <div class="rad-free-shipping-progress" role="status">
+    <div class="rad-free-shipping-progress__message">
+      <svg
+        class="rad-free-shipping-progress__icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path d="M3.5 6.5h11v9.25h-11V6.5Zm11 3.25h3.2l2.8 3.1v2.9h-5.95V9.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M7.25 18.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm10 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <p>
+        {% if free_shipping_remaining > 0 %}
+          Spend {{ free_shipping_remaining | money }} more to get free shipping!
+        {% else %}
+          You’ve unlocked free shipping!
+        {% endif %}
+      </p>
+    </div>
+    <div
+      class="rad-free-shipping-progress__bar"
+      role="progressbar"
+      aria-label="Free shipping progress"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="{{ free_shipping_progress }}"
+    >
+      <span style="--rad-free-shipping-progress: {{ free_shipping_progress }}%;"></span>
+    </div>
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .rad-free-shipping-progress {
+    display: grid;
+    gap: var(--gap-sm);
+    padding: var(--padding-lg) var(--cart-drawer-padding);
+    border-block-end: var(--style-border-width) solid rgb(var(--color-foreground-rgb) / var(--opacity-10-25));
+  }
+
+  .rad-free-shipping-progress__message {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+  }
+
+  .rad-free-shipping-progress__message p {
+    margin: 0;
+    font-size: var(--font-size--sm);
+  }
+
+  .rad-free-shipping-progress__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex: 0 0 auto;
+  }
+
+  .rad-free-shipping-progress__bar {
+    height: 0.5rem;
+    overflow: hidden;
+    border-radius: var(--style-border-radius-pills);
+    background: rgb(var(--color-foreground-rgb) / var(--opacity-10));
+  }
+
+  .rad-free-shipping-progress__bar span {
+    display: block;
+    width: var(--rad-free-shipping-progress);
+    height: 100%;
+    background: var(--color-foreground);
+    transition: width var(--animation-speed) var(--animation-easing);
+  }
+{% endstylesheet %}

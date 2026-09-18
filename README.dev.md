@@ -157,3 +157,12 @@ Avoid editing shared Horizon files unless there is no practical alternative:
 - core header/cart/theme files
 
 If a shared Horizon file must be edited, keep the diff tiny and clearly comment the reason so future Horizon merges are easier to review.
+
+## Cart drawer customizations
+
+The drawer includes two Radiance-only snippets:
+
+- `snippets/rad_cart_drawer_enhancements.liquid` enlarges the drawer product image and exposes labeled option values such as `Color: Pepper`, without affecting the cart page.
+- `snippets/rad_free_shipping_progress.liquid` shows progress toward the `rad_free_shipping_threshold` setting under Theme settings → Cart.
+
+They are connected by two small render calls in `snippets/cart-drawer.liquid`; option labels use a small drawer-only branch in `snippets/cart-products.liquid`. Keep those integration points when resolving future Horizon cart updates.

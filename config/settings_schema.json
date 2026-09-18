@@ -1530,6 +1530,20 @@
         "content": "t:content.cart_features"
       },
       {
+        "type": "header",
+        "content": "Free shipping progress"
+      },
+      {
+        "type": "range",
+        "id": "rad_free_shipping_threshold",
+        "label": "Free shipping threshold",
+        "info": "Amount in your store's base currency. Set to 0 to hide the progress bar.",
+        "min": 0,
+        "max": 500,
+        "step": 1,
+        "default": 85
+      },
+      {
         "type": "checkbox",
         "id": "show_cart_note",
         "label": "t:settings.seller_note",

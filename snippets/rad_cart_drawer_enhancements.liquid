@@ -1,0 +1,35 @@
+{%- doc -%}
+  Styles the custom cart-drawer enhancements without affecting the cart page.
+{%- enddoc -%}
+
+{% stylesheet %}
+  .cart-drawer__items .cart-items__table-row,
+  .cart-drawer__items .cart-items__table-row--full-width-variants {
+    grid-template-columns: clamp(4.75rem, 22cqi, 6.25rem) minmax(0, 1fr) auto;
+  }
+
+  .cart-drawer__items .cart-items__title {
+    font-size: var(--font-size--md);
+  }
+
+  .cart-drawer__items .cart-items__variants--drawer {
+    display: grid;
+    gap: var(--gap-3xs);
+    margin-block-start: var(--margin-2xs);
+  }
+
+  .cart-drawer__items .cart-items__variants--drawer .cart-items__variant {
+    display: flex;
+    gap: 0.25rem;
+    font-size: var(--font-size--sm);
+  }
+
+  .cart-drawer__items .cart-items__variants--drawer dt,
+  .cart-drawer__items .cart-items__variants--drawer dd {
+    margin: 0;
+  }
+
+  .cart-drawer__items .cart-items__variants--drawer dt {
+    color: var(--color-foreground);
+  }
+{% endstylesheet %}

@@ -22,6 +22,9 @@
     fetchpriority="low"
   ></script>
 
+  {% # Radiance: drawer-only product sizing and option-label styles. %}
+  {% render 'rad_cart_drawer_enhancements' %}
+
   {% capture empty_cart_drawer_content %}
     <div
       class="cart-drawer__content"
@@ -110,6 +113,8 @@
                 class="cart-drawer__content"
                 aria-label="{{ 'accessibility.cart' | t }}"
               >
+                {% # Radiance: configurable progress toward the free-shipping threshold. %}
+                {% render 'rad_free_shipping_progress' %}
                 <scroll-hint class="cart-drawer__items">
                   {% render 'cart-products', context: 'drawer' %}
                 </scroll-hint>
