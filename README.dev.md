@@ -166,3 +166,7 @@ The drawer includes two Radiance-only snippets:
 - `snippets/rad_free_shipping_progress.liquid` shows progress toward the `rad_free_shipping_threshold` setting under Theme settings → Cart.
 
 They are connected by two small render calls in `snippets/cart-drawer.liquid`; option labels use a small drawer-only branch in `snippets/cart-products.liquid`. Keep those integration points when resolving future Horizon cart updates.
+
+## CC-shirt add-to-cart icon
+
+`blocks/rad_ccshirt_add_to_cart_icon.liquid` hides the cart icon only when it is included in `templates/product.rad_ccshirt.json`. It keeps the shared Horizon add-to-cart block unchanged, so upstream updates do not conflict with this CC-shirt-specific choice.

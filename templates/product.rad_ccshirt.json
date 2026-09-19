@@ -293,6 +293,11 @@
               },
               "block_order": []
             },
+            "rad_ccshirt_add_to_cart_icon": {
+              "type": "rad_ccshirt_add_to_cart_icon",
+              "settings": {},
+              "blocks": {}
+            },
             "rad_ccshirt_after_cart": {
               "type": "rad_ccshirt_after_cart",
               "settings": {
@@ -343,6 +348,7 @@
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
+            "rad_ccshirt_add_to_cart_icon",
             "rad_ccshirt_after_cart",
             "text_aEtTtq"
           ]

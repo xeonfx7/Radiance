@@ -1,0 +1,28 @@
+{%- doc -%}
+  Hides the add-to-cart icon for the Comfort Colors product template only.
+{%- enddoc -%}
+
+<span
+  class="rad_ccshirt_add_to_cart_icon"
+  hidden
+  {{ block.shopify_attributes }}
+></span>
+
+{% stylesheet %}
+  .product-details:has(.rad_ccshirt_add_to_cart_icon) .add-to-cart-icon {
+    display: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RAD CC add-to-cart icon",
+  "tag": null,
+  "settings": [],
+  "presets": [
+    {
+      "name": "RAD CC add-to-cart icon"
+    }
+  ]
+}
+{% endschema %}
