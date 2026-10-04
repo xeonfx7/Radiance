@@ -9,12 +9,6 @@
  */
 {
   "sections": {
-    "rad_breadcrumbs": {
-      "type": "rad_breadcrumbs",
-      "settings": {
-        "show_collection": true
-      }
-    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -92,6 +86,13 @@
             "padding-inline-end": 0
           },
           "blocks": {
+            "rad_ccshirt_breadcrumbs": {
+              "type": "rad_ccshirt_breadcrumbs",
+              "settings": {
+                "show_collection": true
+              },
+              "blocks": {}
+            },
             "group_icgrde": {
               "type": "group",
               "name": "t:names.header",
@@ -348,6 +349,7 @@
             }
           },
           "block_order": [
+            "rad_ccshirt_breadcrumbs",
             "group_icgrde",
             "rad_ccshirt_meta",
             "divider_VJhene",
@@ -519,7 +521,6 @@
     }
   },
   "order": [
-    "rad_breadcrumbs",
     "main",
     "product_recommendations_qggXJq"
   ]

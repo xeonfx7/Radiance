@@ -3,6 +3,7 @@
 
   @param {product} product - Product object used for the final breadcrumb item.
   @param {boolean} [show_collection] - Whether to show a collection breadcrumb when available.
+  @param {boolean} [embedded] - Whether breadcrumbs are rendered inside product details.
 {% enddoc %}
 
 {%- liquid
@@ -25,7 +26,7 @@
 -%}
 
 <nav
-  class="rad_breadcrumbs"
+  class="rad_breadcrumbs{% if embedded %} rad_breadcrumbs--embedded{% endif %}"
   aria-label="Breadcrumb"
 >
   <ol class="rad_breadcrumbs__list list-unstyled">
@@ -100,6 +101,12 @@
     font-size: var(--font-size--sm);
     line-height: var(--line-height--body-normal);
     color: rgb(var(--color-foreground-rgb) / var(--opacity-80));
+  }
+
+  .rad_breadcrumbs--embedded {
+    max-width: none;
+    margin: 0;
+    padding: 0;
   }
 
   .rad_breadcrumbs__list {

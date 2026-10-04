@@ -1,0 +1,32 @@
+{%- doc -%}
+  Renders breadcrumbs above the title for the Comfort Colors shirt template.
+{%- enddoc -%}
+
+<div {{ block.shopify_attributes }}>
+  {% render
+    'rad_breadcrumbs',
+    product: closest.product,
+    show_collection: block.settings.show_collection,
+    embedded: true
+  %}
+</div>
+
+{% schema %}
+{
+  "name": "RAD CC breadcrumbs",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_collection",
+      "label": "Show collection",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "RAD CC breadcrumbs"
+    }
+  ]
+}
+{% endschema %}
