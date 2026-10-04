@@ -125,10 +125,19 @@
         "collection_inverse_logo": false,
         "text_color_transparent_collection": ""
       }
+    },
+    "rad_cart_alert": {
+      "type": "rad_cart_alert",
+      "settings": {
+        "enabled": true,
+        "badge_color": "#d9363e",
+        "text_color": "#ffffff"
+      }
     }
   },
   "order": [
     "header_announcements_9jGBFp",
-    "header_section"
+    "header_section",
+    "rad_cart_alert"
   ]
 }

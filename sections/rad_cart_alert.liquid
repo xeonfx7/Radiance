@@ -1,0 +1,98 @@
+{% comment %}
+  Adds a continuous alert pulse to the header cart counter while the cart contains items.
+  The effect relies on Horizon's existing cart-bubble visibility state and does not alter
+  Horizon header or cart JavaScript.
+{% endcomment %}
+
+{% if section.settings.enabled %}
+  <span class="rad_cart_alert" hidden aria-hidden="true"></span>
+{% endif %}
+
+<style>
+  body:has(.rad_cart_alert) .header-actions__cart-icon {
+    --cart-bubble-size: 19px;
+  }
+
+  body:has(.rad_cart_alert) .header-actions__action,
+  body:has(.rad_cart_alert) .header-actions__cart-icon {
+    overflow: visible;
+  }
+
+  body:has(.rad_cart_alert) .header-actions__cart-icon .cart-bubble {
+    top: calc(50% + 1px);
+    right: auto;
+    left: calc(50% + 1px);
+  }
+
+  body:has(.rad_cart_alert) .header-actions__cart-icon:has(.cart-bubble:not(.visually-hidden)) {
+    --cart-bubble-background: {{ section.settings.badge_color }};
+    --cart-bubble-text: {{ section.settings.text_color }};
+  }
+
+  body:has(.rad_cart_alert) .header-actions__cart-icon.header-actions__cart-icon--has-cart svg {
+    mask: none;
+  }
+
+  body:has(.rad_cart_alert) .header-actions__cart-icon:has(.cart-bubble:not(.visually-hidden)) .cart-bubble__background {
+    box-sizing: border-box;
+    border: 1px solid #fff;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    body:has(.rad_cart_alert) .header-actions__cart-icon:has(.cart-bubble:not(.visually-hidden)) .cart-bubble {
+      animation: rad-cart-alert-pulse 1.6s ease-out infinite;
+    }
+  }
+
+  @keyframes rad-cart-alert-pulse {
+    0% {
+      box-shadow: 0 0 0 0 {{ section.settings.badge_color | color_modify: 'alpha', 0.65 }};
+      transform: scale(1);
+    }
+
+    35% {
+      box-shadow: 0 0 0 5px {{ section.settings.badge_color | color_modify: 'alpha', 0.3 }};
+      transform: scale(1.12);
+    }
+
+    75%,
+    100% {
+      box-shadow: 0 0 0 10px {{ section.settings.badge_color | color_modify: 'alpha', 0 }};
+      transform: scale(1);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "RAD cart alert",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable continuous cart alert pulse",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Alert badge color",
+      "default": "#d9363e"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Alert badge text color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "RAD cart alert"
+    }
+  ]
+}
+{% endschema %}

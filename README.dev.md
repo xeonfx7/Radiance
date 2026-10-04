@@ -169,6 +169,12 @@ The drawer includes two Radiance-only snippets:
 
 They are connected by two small render calls in `snippets/cart-drawer.liquid`; option labels use a small drawer-only branch in `snippets/cart-products.liquid`. Keep those integration points when resolving future Horizon cart updates.
 
+## Header cart alert
+
+`sections/rad_cart_alert.liquid` is a Header group section. It recolors the existing Horizon cart-count bubble and runs an expanding alert ring while the cart contains items. It uses Horizon's existing cart-bubble visibility state; it does not alter Horizon header or cart JavaScript.
+
+Adjust its enable switch and badge colors in the theme editor under **Header → RAD cart alert**. Keep the `rad_cart_alert` entry in `sections/header-group.json` when resolving header group setting changes.
+
 ## CC-shirt add-to-cart icon
 
 `blocks/rad_ccshirt_add_to_cart_icon.liquid` hides the cart icon only when it is included in `templates/product.rad_ccshirt.json`. It keeps the shared Horizon add-to-cart block unchanged, so upstream updates do not conflict with this CC-shirt-specific choice.
