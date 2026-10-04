@@ -1,0 +1,105 @@
+{%- doc -%}
+  Applies the Sloth Hiking Club-inspired product title metrics only to the
+  Comfort Colors shirt template. This marker block is intentionally empty.
+{%- enddoc -%}
+
+<span
+  class="rad_ccshirt_title_style"
+  hidden
+  aria-hidden="true"
+  {{ block.shopify_attributes }}
+></span>
+
+{% stylesheet %}
+  /* The product-details stack has a 28px block gap. The reference begins the
+     title immediately after the breadcrumb's 26px-tall area. */
+  .product-details:has(.rad_ccshirt_title_style) .rad_breadcrumbs--embedded {
+    margin-block-end: -28px;
+  }
+
+  .product-details:has(.rad_ccshirt_title_style)
+    .group-block-content
+    > .group-block:has(> .group-block-content h1)
+    > .group-block-content {
+    --gap: 10px;
+  }
+
+  .product-details:has(.rad_ccshirt_title_style)
+    .group-block-content
+    > .group-block:has(> .group-block-content h1)
+    .text-block:has(> h1),
+  .product-details:has(.rad_ccshirt_title_style)
+    .group-block-content
+    > .group-block:has(> .group-block-content h1)
+    .text-block:has(> h1)
+    > h1 {
+    font-family: var(--font-subheading--family);
+    font-style: var(--font-subheading--style);
+    font-weight: var(--font-subheading--weight);
+    font-size: 2.16rem;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  .product-details:has(.rad_ccshirt_title_style)
+    .group-block-content
+    > .group-block:has(> .group-block-content h1)
+    h1 {
+    margin: 0;
+  }
+
+  .product-details:has(.rad_ccshirt_title_style)
+    .group-block-content
+    > .group-block:has(> .group-block-content h1)
+    product-price
+    [ref='priceContainer'] {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-family: var(--font-body--family);
+  }
+
+  .product-details:has(.rad_ccshirt_title_style)
+    .group-block-content
+    > .group-block:has(> .group-block-content h1)
+    product-price
+    .price {
+    font-family: var(--font-body--family);
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .product-details:has(.rad_ccshirt_title_style)
+    .group-block-content
+    > .group-block:has(> .group-block-content h1)
+    product-price
+    .compare-at-price {
+    color: var(--color-foreground);
+    font-family: var(--font-body--family);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  /* Horizon's product stack uses a 28px gap. The reference places the rating
+     row 12px after the price, so reduce this one gap by 16px. */
+  .product-details:has(.rad_ccshirt_title_style)
+    .group-block-content
+    > .group-block:has(> .group-block-content h1)
+    + .rad_ccshirt_meta {
+    margin-block-start: -16px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RAD CC title style",
+  "tag": null,
+  "presets": [
+    {
+      "name": "RAD CC title style"
+    }
+  ]
+}
+{% endschema %}

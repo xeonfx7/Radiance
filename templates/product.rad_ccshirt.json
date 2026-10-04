@@ -93,6 +93,11 @@
               },
               "blocks": {}
             },
+            "rad_ccshirt_title_style": {
+              "type": "rad_ccshirt_title_style",
+              "settings": {},
+              "blocks": {}
+            },
             "group_icgrde": {
               "type": "group",
               "name": "t:names.header",
@@ -104,7 +109,7 @@
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
+                "gap": 10,
                 "width": "fill",
                 "custom_width": 100,
                 "width_mobile": "fill",
@@ -141,11 +146,11 @@
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "h3",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
+                    "type_preset": "custom",
+                    "font": "var(--font-subheading--family)",
+                    "font_size": "2rem",
+                    "line_height": "tight",
+                    "letter_spacing": "tight",
                     "case": "none",
                     "wrap": "pretty",
                     "text_color": "",
@@ -174,7 +179,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "text_color": "",
-                    "padding-block-start": 4,
+                    "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
@@ -182,31 +187,16 @@
                   "blocks": {}
                 }
               },
-              "block_order": [
-                "text_xpVMaM",
-                "price_tVjtKg"
-              ]
+              "block_order": ["text_xpVMaM", "price_tVjtKg"]
             },
             "rad_ccshirt_meta": {
               "type": "rad_ccshirt_meta",
               "settings": {
-                "review_text": "4.8/5 - 2535 tee reviews",
+                "review_text": "4.8/5 - 2535 reviews",
+                "show_features": false,
                 "fabric_label": "Comfort Colors 1717",
                 "cotton_label": "100% cotton",
                 "fit_label": "Relaxed fit"
-              },
-              "blocks": {}
-            },
-            "divider_VJhene": {
-              "type": "_divider",
-              "name": "t:names.divider",
-              "settings": {
-                "thickness": 1,
-                "corner_radius": "square",
-                "divider_color": "{{ settings.color_palette.color3 }}",
-                "width_percent": 100,
-                "padding-block-start": 0,
-                "padding-block-end": 0
               },
               "blocks": {}
             },
@@ -229,6 +219,14 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "rad_ccshirt_option_labels": {
+              "type": "rad_ccshirt_option_labels",
+              "settings": {
+                "size_guide_url": "",
+                "size_guide_label": "Find my size"
               },
               "blocks": {}
             },
@@ -350,10 +348,11 @@
           },
           "block_order": [
             "rad_ccshirt_breadcrumbs",
+            "rad_ccshirt_title_style",
             "group_icgrde",
             "rad_ccshirt_meta",
-            "divider_VJhene",
             "variant_picker_R3rGDr",
+            "rad_ccshirt_option_labels",
             "rad_ccshirt_swatch_cursor",
             "buy_buttons_eYQEYi",
             "rad_ccshirt_add_to_cart_icon",
@@ -362,9 +361,7 @@
           ]
         }
       },
-      "block_order": [
-        "disclosures"
-      ],
+      "block_order": ["disclosures"],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
@@ -496,9 +493,7 @@
           ]
         }
       },
-      "block_order": [
-        "text_cbcgyb"
-      ],
+      "block_order": ["text_cbcgyb"],
       "name": "t:names.product_recommendations",
       "settings": {
         "product": "{{ closest.product }}",
@@ -520,8 +515,5 @@
       }
     }
   },
-  "order": [
-    "main",
-    "product_recommendations_qggXJq"
-  ]
+  "order": ["main", "product_recommendations_qggXJq"]
 }

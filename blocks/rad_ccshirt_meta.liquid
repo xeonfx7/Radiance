@@ -1,5 +1,5 @@
 {% liquid
-  assign review_text = block.settings.review_text | default: '4.8/5 - 2535 tee reviews'
+  assign review_text = block.settings.review_text | default: '4.8/5 - 2535 reviews'
   assign fabric_label = block.settings.fabric_label | default: 'Comfort Colors 1717'
   assign cotton_label = block.settings.cotton_label | default: '100% cotton'
   assign fit_label = block.settings.fit_label | default: 'Relaxed fit'
@@ -29,8 +29,9 @@
     <span class="rad_ccshirt_meta__review_text">{{ review_text }}</span>
   </div>
 
-  <div class="rad_ccshirt_meta__features">
-    <div class="rad_ccshirt_meta__feature">
+  {% if block.settings.show_features %}
+    <div class="rad_ccshirt_meta__features">
+      <div class="rad_ccshirt_meta__feature">
       <span
         class="rad_ccshirt_meta__icon"
         aria-hidden="true"
@@ -45,9 +46,9 @@
         </svg>
       </span>
       <span>{{ fabric_label }}</span>
-    </div>
+      </div>
 
-    <div class="rad_ccshirt_meta__feature">
+      <div class="rad_ccshirt_meta__feature">
       <span
         class="rad_ccshirt_meta__icon"
         aria-hidden="true"
@@ -62,9 +63,9 @@
         </svg>
       </span>
       <span>{{ cotton_label }}</span>
-    </div>
+      </div>
 
-    <div class="rad_ccshirt_meta__feature">
+      <div class="rad_ccshirt_meta__feature">
       <span
         class="rad_ccshirt_meta__icon"
         aria-hidden="true"
@@ -79,8 +80,9 @@
         </svg>
       </span>
       <span>{{ fit_label }}</span>
+      </div>
     </div>
-  </div>
+  {% endif %}
 </div>
 
 {% stylesheet %}
@@ -89,8 +91,10 @@
     gap: 12px;
     width: 100%;
     color: var(--color-foreground);
-    font-size: 0.875rem;
-    line-height: 1.35;
+    font-family: var(--font-body--family);
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.5;
   }
 
   .rad_ccshirt_meta__reviews,
@@ -101,7 +105,7 @@
   }
 
   .rad_ccshirt_meta__reviews {
-    gap: 8px;
+    gap: 2px;
   }
 
   .rad_ccshirt_meta__stars {
@@ -118,6 +122,9 @@
   }
 
   .rad_ccshirt_meta__review_text {
+    font-size: 12px;
+    line-height: 18px;
+    margin-inline-start: 4px;
     white-space: nowrap;
   }
 
@@ -153,9 +160,7 @@
     }
 
     .rad_ccshirt_meta__reviews {
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 6px;
+      gap: 2px;
     }
   }
 {% endstylesheet %}
@@ -169,7 +174,13 @@
       "type": "text",
       "id": "review_text",
       "label": "Review text",
-      "default": "4.8/5 - 2535 tee reviews"
+      "default": "4.8/5 - 2535 reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_features",
+      "label": "Show fabric, cotton, and fit labels",
+      "default": true
     },
     {
       "type": "text",

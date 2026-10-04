@@ -9,6 +9,29 @@
 ></span>
 
 {% stylesheet %}
+  .product-details:has(.rad_ccshirt_swatch_cursor) .rad_ccshirt_meta + variant-picker {
+    /* The product-details stack has a 28px gap; the reference has 16px from
+       the rating to the color label. */
+    margin-block-start: -12px;
+  }
+
+  .product-details:has(.rad_ccshirt_swatch_cursor) .variant-option--swatches legend {
+    display: flex;
+    align-items: center;
+    margin: 0 0 8px;
+    font-family: var(--font-body--family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .product-details:has(.rad_ccshirt_swatch_cursor) .variant-option--swatches .variant-option__swatch-value {
+    padding-inline-start: 4px;
+    color: inherit;
+    font-family: var(--font-subheading--family);
+    font-weight: var(--font-subheading--weight);
+  }
+
   .product-details:has(.rad_ccshirt_swatch_cursor) .variant-option--swatches .variant-option__button-label,
   .product-details:has(.rad_ccshirt_swatch_cursor) .variant-option--swatches .variant-option__button-label * {
     cursor: pointer;

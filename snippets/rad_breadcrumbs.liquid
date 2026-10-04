@@ -35,7 +35,7 @@
         class="rad_breadcrumbs__link"
         href="{{ routes.root_url }}"
       >
-        {{- 'Home' -}}
+        {{- shop.name | escape -}}
       </a>
     </li>
 
@@ -67,7 +67,7 @@
       {
         "@type": "ListItem",
         "position": 1,
-        "name": "Home",
+        "name": {{ shop.name | json }},
         "item": {{ home_url | json }}
       }{% if breadcrumb_collection != blank %},
       {
@@ -97,23 +97,25 @@
     max-width: var(--page-width);
     margin: 0 auto;
     padding: var(--padding-md) var(--page-margin);
-    font-family: var(--font-paragraph--family);
-    font-size: var(--font-size--sm);
-    line-height: var(--line-height--body-normal);
+    font-family: var(--font-body--family);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: normal;
     color: rgb(var(--color-foreground-rgb) / var(--opacity-80));
   }
 
   .rad_breadcrumbs--embedded {
     max-width: none;
     margin: 0;
-    padding: 0;
+    padding: 0 0 12px;
   }
 
   .rad_breadcrumbs__list {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--gap-xs);
+    gap: 6px;
     margin: 0;
     padding: 0;
   }
@@ -121,7 +123,7 @@
   .rad_breadcrumbs__item {
     display: inline-flex;
     align-items: center;
-    gap: var(--gap-xs);
+    gap: 6px;
   }
 
   .rad_breadcrumbs__item:not(:first-child)::before {
@@ -139,6 +141,6 @@
   }
 
   .rad_breadcrumbs__item--current {
-    color: var(--color-foreground);
+    color: inherit;
   }
 {% endstylesheet %}

@@ -78,10 +78,12 @@ git status --short
 git add AGENTS.md
 git add README.dev.md
 git add blocks/rad_ccshirt_breadcrumbs.liquid
+git add blocks/rad_ccshirt_title_style.liquid
 git add blocks/rad_ccshirt_meta.liquid
 git add blocks/rad_ccshirt_after_cart.liquid
 git add blocks/rad_ccshirt_add_to_cart_icon.liquid
 git add blocks/rad_ccshirt_swatch_cursor.liquid
+git add blocks/rad_ccshirt_option_labels.liquid
 git add snippets/rad_breadcrumbs.liquid
 git add templates/product.rad_ccshirt.json
 git add templates/product.rad_shirt.json
@@ -182,3 +184,7 @@ Adjust its enable switch and badge colors in the theme editor under **Header →
 ## CC-shirt swatch cursor
 
 `blocks/rad_ccshirt_swatch_cursor.liquid` gives available color swatches a pointer cursor and unavailable choices a not-allowed cursor, only on the CC-shirt template.
+
+## CC-shirt product title
+
+`blocks/rad_ccshirt_title_style.liquid` applies the product-title font, size, tracking, price styling, and spacing used by the CC-shirt design reference. `blocks/rad_ccshirt_meta.liquid` supplies the matching star-rating row; its optional fabric, cotton, and fit labels are disabled in the CC-shirt template. `blocks/rad_ccshirt_swatch_cursor.liquid` provides color-label styling. `blocks/rad_ccshirt_option_labels.liquid` formats Color and Size as `Color: VALUE` and `Size: VALUE`, and can add a linked “Find my size” control. These are included only in `templates/product.rad_ccshirt.json`, leaving shared Horizon title, price, review, and variant-picker styles unchanged.

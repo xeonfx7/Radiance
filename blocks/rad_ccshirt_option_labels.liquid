@@ -1,0 +1,159 @@
+{%- doc -%}
+  Formats the Color and Size option labels for the Comfort Colors shirt template
+  and places an optional size-guide link beside the Size label.
+{%- enddoc -%}
+
+<span
+  class="rad_ccshirt_option_labels"
+  hidden
+  aria-hidden="true"
+  {{ block.shopify_attributes }}
+></span>
+
+{%- if block.settings.size_guide_url != blank -%}
+  <a
+    class="rad_ccshirt_size_guide"
+    href="{{ block.settings.size_guide_url }}"
+    hidden
+  >
+    {{- block.settings.size_guide_label | escape -}}
+  </a>
+{%- endif -%}
+
+<script>
+  (() => {
+    const script = document.currentScript;
+    const productDetails = script.closest('.product-details');
+
+    if (!productDetails || productDetails.dataset.radCcshirtOptionLabels === 'true') return;
+
+    const picker = productDetails.querySelector('variant-picker');
+    if (!picker) return;
+
+    productDetails.dataset.radCcshirtOptionLabels = 'true';
+
+    const sizeGuide = productDetails.querySelector('.rad_ccshirt_size_guide');
+
+    const updateOptionLabels = () => {
+      picker.querySelectorAll('.variant-option').forEach((fieldset) => {
+        const input = fieldset.querySelector('input[data-option-name]');
+        const legend = fieldset.querySelector('legend');
+
+        if (!input || !legend) return;
+
+        const optionName = input.dataset.optionName;
+        const normalizedName = optionName.toLowerCase();
+
+        if (normalizedName !== 'color' && normalizedName !== 'size') return;
+
+        const selectedValue = fieldset.querySelector('input:checked')?.value || '';
+        let label = legend.querySelector(':scope > .rad_ccshirt_option_label');
+        let value = label?.querySelector('strong');
+
+        if (!label || !value) {
+          label = document.createElement('span');
+          value = document.createElement('strong');
+
+          label.className = 'rad_ccshirt_option_label';
+          label.append(`${optionName}: `);
+          label.append(value);
+          legend.replaceChildren(label);
+        }
+
+        const labelText = `${optionName}: `;
+        if (label.firstChild.textContent !== labelText) {
+          label.firstChild.textContent = labelText;
+        }
+        if (value.textContent !== selectedValue) {
+          value.textContent = selectedValue;
+        }
+
+        if (normalizedName === 'size' && sizeGuide) {
+          legend.append(sizeGuide);
+          sizeGuide.hidden = false;
+        }
+      });
+    };
+
+    let updateQueued = false;
+    const scheduleUpdate = () => {
+      if (updateQueued) return;
+
+      updateQueued = true;
+      requestAnimationFrame(() => {
+        updateQueued = false;
+        updateOptionLabels();
+      });
+    };
+
+    picker.addEventListener('change', scheduleUpdate);
+    new MutationObserver(scheduleUpdate).observe(picker, {
+      childList: true,
+      subtree: true,
+    });
+    updateOptionLabels();
+  })();
+</script>
+
+{% stylesheet %}
+  .product-details:has(.rad_ccshirt_option_labels) .variant-option--buttons legend {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0 0 8px;
+    font-family: var(--font-body--family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .product-details:has(.rad_ccshirt_option_labels) .rad_ccshirt_option_label strong {
+    font-family: var(--font-subheading--family);
+    font-weight: var(--font-subheading--weight);
+  }
+
+  .product-details:has(.rad_ccshirt_option_labels) .rad_ccshirt_size_guide {
+    display: inline-flex;
+    align-items: center;
+    min-height: 31px;
+    margin-inline-start: auto;
+    padding: 4px 8px;
+    border: 1px dashed currentColor;
+    color: inherit;
+    font-family: var(--font-body--family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .product-details:has(.rad_ccshirt_option_labels) .rad_ccshirt_size_guide:hover {
+    text-decoration: underline;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RAD CC option labels",
+  "tag": null,
+  "settings": [
+    {
+      "type": "url",
+      "id": "size_guide_url",
+      "label": "Size guide link"
+    },
+    {
+      "type": "text",
+      "id": "size_guide_label",
+      "label": "Size guide label",
+      "default": "Find my size"
+    }
+  ],
+  "presets": [
+    {
+      "name": "RAD CC option labels"
+    }
+  ]
+}
+{% endschema %}
