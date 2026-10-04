@@ -231,6 +231,11 @@
               },
               "blocks": {}
             },
+            "rad_ccshirt_swatch_cursor": {
+              "type": "rad_ccshirt_swatch_cursor",
+              "settings": {},
+              "blocks": {}
+            },
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
               "settings": {
@@ -347,6 +352,7 @@
             "rad_ccshirt_meta",
             "divider_VJhene",
             "variant_picker_R3rGDr",
+            "rad_ccshirt_swatch_cursor",
             "buy_buttons_eYQEYi",
             "rad_ccshirt_add_to_cart_icon",
             "rad_ccshirt_after_cart",

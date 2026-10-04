@@ -170,3 +170,7 @@ They are connected by two small render calls in `snippets/cart-drawer.liquid`; o
 ## CC-shirt add-to-cart icon
 
 `blocks/rad_ccshirt_add_to_cart_icon.liquid` hides the cart icon only when it is included in `templates/product.rad_ccshirt.json`. It keeps the shared Horizon add-to-cart block unchanged, so upstream updates do not conflict with this CC-shirt-specific choice.
+
+## CC-shirt swatch cursor
+
+`blocks/rad_ccshirt_swatch_cursor.liquid` gives available color swatches a pointer cursor and unavailable choices a not-allowed cursor, only on the CC-shirt template.

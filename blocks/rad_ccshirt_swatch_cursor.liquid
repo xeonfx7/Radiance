@@ -1,0 +1,39 @@
+{%- doc -%}
+  Ensures available Comfort Colors swatches show a pointer cursor.
+{%- enddoc -%}
+
+<span
+  class="rad_ccshirt_swatch_cursor"
+  hidden
+  {{ block.shopify_attributes }}
+></span>
+
+{% stylesheet %}
+  .product-details:has(.rad_ccshirt_swatch_cursor) .variant-option--swatches .variant-option__button-label,
+  .product-details:has(.rad_ccshirt_swatch_cursor) .variant-option--swatches .variant-option__button-label * {
+    cursor: pointer;
+  }
+
+  .product-details:has(.rad_ccshirt_swatch_cursor)
+    .variant-option--swatches
+    .variant-option__button-label:has([data-option-available='false']),
+  .product-details:has(.rad_ccshirt_swatch_cursor)
+    .variant-option--swatches
+    .variant-option__button-label:has([data-option-available='false'])
+    * {
+    cursor: not-allowed;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RAD CC swatch cursor",
+  "tag": null,
+  "settings": [],
+  "presets": [
+    {
+      "name": "RAD CC swatch cursor"
+    }
+  ]
+}
+{% endschema %}
