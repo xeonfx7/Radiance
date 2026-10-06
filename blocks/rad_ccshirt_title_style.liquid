@@ -90,6 +90,88 @@
     + .rad_ccshirt_meta {
     margin-block-start: -16px;
   }
+
+  @media screen and (max-width: 749px) {
+    .product-details:has(.rad_ccshirt_title_style)
+      .group-block-content
+      > .group-block:has(> .group-block-content h1)
+      product-price
+      [ref='priceContainer'] {
+      gap: 8px;
+    }
+
+    .product-details:has(.rad_ccshirt_title_style)
+      .group-block-content
+      > .group-block:has(> .group-block-content h1)
+      product-price
+      .price {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .product-details:has(.rad_ccshirt_title_style)
+      .group-block-content
+      > .group-block:has(> .group-block-content h1)
+      product-price
+      .compare-at-price {
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .product-details:has(.rad_ccshirt_title_style)
+      .group-block-content
+      > .group-block:has(> .group-block-content h1)
+      > .group-block-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      column-gap: 12px;
+      row-gap: 10px;
+    }
+
+    .product-details:has(.rad_ccshirt_title_style)
+      .group-block-content
+      > .group-block:has(> .group-block-content h1)
+      > .group-block-content
+      > :has(h1) {
+      grid-column: 1 / -1;
+    }
+
+    .product-details:has(.rad_ccshirt_title_style)
+      .group-block-content
+      > .group-block:has(> .group-block-content h1)
+      > .group-block-content
+      > :has(product-price) {
+      grid-column: 1;
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+    }
+
+    .product-details:has(.rad_ccshirt_title_style)
+      .group-block-content
+      > .group-block:has(> .group-block-content h1)
+      > .group-block-content
+      > .rad_ccshirt_meta {
+      grid-column: 2;
+      align-self: center;
+    }
+
+    .product-details:has(.rad_ccshirt_title_style)
+      .group-block-content
+      > .group-block:has(> .group-block-content h1)
+      .text-block:has(> h1),
+    .product-details:has(.rad_ccshirt_title_style)
+      .group-block-content
+      > .group-block:has(> .group-block-content h1)
+      .text-block:has(> h1)
+      > h1 {
+      font-size: 25px;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}

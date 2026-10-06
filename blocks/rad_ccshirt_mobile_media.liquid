@@ -1,0 +1,34 @@
+{%- doc -%}
+  Applies the mobile product-media inset used by the Comfort Colors shirt
+  template. This marker block is intentionally empty.
+{%- enddoc -%}
+
+<span
+  class="rad_ccshirt_mobile_media"
+  hidden
+  aria-hidden="true"
+  {{ block.shopify_attributes }}
+></span>
+
+{% stylesheet %}
+  /* The reference gallery leaves a 16px gutter on both sides at mobile sizes.
+     Keep this local to the CC-shirt template rather than changing Horizon's
+     shared product-media layout. */
+  @media screen and (max-width: 749px) {
+    product-component:has(.rad_ccshirt_mobile_media) .product-information__media {
+      padding-inline: 16px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RAD CC mobile media",
+  "tag": null,
+  "presets": [
+    {
+      "name": "RAD CC mobile media"
+    }
+  ]
+}
+{% endschema %}

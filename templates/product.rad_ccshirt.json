@@ -98,6 +98,11 @@
               "settings": {},
               "blocks": {}
             },
+            "rad_ccshirt_mobile_media": {
+              "type": "rad_ccshirt_mobile_media",
+              "settings": {},
+              "blocks": {}
+            },
             "group_icgrde": {
               "type": "group",
               "name": "t:names.header",
@@ -185,20 +190,20 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "rad_ccshirt_meta": {
+                  "type": "rad_ccshirt_meta",
+                  "settings": {
+                    "review_text": "4.8/5 - 2535 reviews",
+                    "show_features": false,
+                    "fabric_label": "Comfort Colors 1717",
+                    "cotton_label": "100% cotton",
+                    "fit_label": "Relaxed fit"
+                  },
+                  "blocks": {}
                 }
               },
-              "block_order": ["text_xpVMaM", "price_tVjtKg"]
-            },
-            "rad_ccshirt_meta": {
-              "type": "rad_ccshirt_meta",
-              "settings": {
-                "review_text": "4.8/5 - 2535 reviews",
-                "show_features": false,
-                "fabric_label": "Comfort Colors 1717",
-                "cotton_label": "100% cotton",
-                "fit_label": "Relaxed fit"
-              },
-              "blocks": {}
+              "block_order": ["text_xpVMaM", "price_tVjtKg", "rad_ccshirt_meta"]
             },
             "variant_picker_R3rGDr": {
               "type": "variant-picker",
@@ -349,8 +354,8 @@
           "block_order": [
             "rad_ccshirt_breadcrumbs",
             "rad_ccshirt_title_style",
+            "rad_ccshirt_mobile_media",
             "group_icgrde",
-            "rad_ccshirt_meta",
             "variant_picker_R3rGDr",
             "rad_ccshirt_option_labels",
             "rad_ccshirt_swatch_cursor",
