@@ -131,6 +131,27 @@
   .product-details:has(.rad_ccshirt_option_labels) .rad_ccshirt_size_guide:hover {
     text-decoration: underline;
   }
+
+  @media screen and (max-width: 749px) {
+    /* Match the reference's six compact Size buttons in one row. */
+    .product-details:has(.rad_ccshirt_option_labels)
+      .variant-option--buttons:not(.variant-option--swatches):has(input[data-option-name='Size']) {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 4px;
+    }
+
+    .product-details:has(.rad_ccshirt_option_labels)
+      .variant-option--buttons:not(.variant-option--swatches):has(input[data-option-name='Size'])
+      .variant-option__button-label {
+      width: 100%;
+      min-width: 0;
+      min-height: 44px;
+      padding: 8px 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}

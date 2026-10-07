@@ -9,12 +9,6 @@
 ></span>
 
 {% stylesheet %}
-  .product-details:has(.rad_ccshirt_swatch_cursor) .rad_ccshirt_meta + variant-picker {
-    /* The product-details stack has a 28px gap; the reference has 16px from
-       the rating to the color label. */
-    margin-block-start: -12px;
-  }
-
   .product-details:has(.rad_ccshirt_swatch_cursor) .variant-option--swatches legend {
     display: flex;
     align-items: center;
@@ -23,6 +17,23 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 1.4;
+  }
+
+  @media screen and (max-width: 749px) {
+    /* The title group and picker are siblings in Horizon's 28px product stack.
+       The reference leaves 16px from the review row to the Color label. */
+    .product-details:has(.rad_ccshirt_swatch_cursor)
+      > .group-block
+      > .group-block-content
+      > .group-block:has(> .group-block-content h1)
+      + variant-picker {
+      margin-block-start: -12px;
+    }
+
+    .product-details:has(.rad_ccshirt_swatch_cursor) .variant-option--swatches legend {
+      margin-block-end: 4px;
+      font-size: 13px;
+    }
   }
 
   .product-details:has(.rad_ccshirt_swatch_cursor) .variant-option--swatches .variant-option__swatch-value {

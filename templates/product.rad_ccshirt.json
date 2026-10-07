@@ -103,6 +103,11 @@
               "settings": {},
               "blocks": {}
             },
+            "rad_ccshirt_media_zoom": {
+              "type": "rad_ccshirt_media_zoom",
+              "settings": {},
+              "blocks": {}
+            },
             "group_icgrde": {
               "type": "group",
               "name": "t:names.header",
@@ -355,6 +360,7 @@
             "rad_ccshirt_breadcrumbs",
             "rad_ccshirt_title_style",
             "rad_ccshirt_mobile_media",
+            "rad_ccshirt_media_zoom",
             "group_icgrde",
             "variant_picker_R3rGDr",
             "rad_ccshirt_option_labels",

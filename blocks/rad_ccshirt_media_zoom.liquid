@@ -1,0 +1,112 @@
+{%- doc -%}
+  Adds a visual zoom affordance to the Comfort Colors shirt product gallery.
+  Horizon's existing image click behavior continues to open the zoom dialog.
+{%- enddoc -%}
+
+<span
+  class="rad_ccshirt_media_zoom"
+  hidden
+  aria-hidden="true"
+  {{ block.shopify_attributes }}
+></span>
+
+<button
+  type="button"
+  class="rad_ccshirt_media_zoom__button"
+  aria-label="{{ 'actions.zoom_media' | t: index: 1 }}"
+  hidden
+>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <circle cx="10" cy="10" r="5.5" />
+    <path d="m14 14 5 5M10 7v6M7 10h6" />
+  </svg>
+</button>
+
+<script>
+  (() => {
+    const script = document.currentScript;
+    const button = script.previousElementSibling;
+    const productComponent = button?.closest('product-component');
+    const gallery = productComponent?.querySelector('.media-gallery--carousel slideshow-container');
+
+    if (!button || !gallery || button.dataset.radCcshirtMediaZoomMounted === 'true') return;
+
+    button.dataset.radCcshirtMediaZoomMounted = 'true';
+    gallery.append(button);
+    button.hidden = false;
+
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const activeSlide =
+        gallery.querySelector('slideshow-slide[aria-hidden="false"]') || gallery.querySelector('slideshow-slide');
+
+      activeSlide?.click();
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  /* A real button triggers Horizon's existing zoom dialog for the active image. */
+  product-component:has(.rad_ccshirt_media_zoom)
+    .media-gallery--carousel
+    slideshow-container
+    .rad_ccshirt_media_zoom__button {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #173b2d;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #173b2d;
+    cursor: zoom-in;
+  }
+
+  product-component:has(.rad_ccshirt_media_zoom)
+    .media-gallery--carousel
+    .rad_ccshirt_media_zoom__button:hover {
+    background: #edf2ee;
+  }
+
+  product-component:has(.rad_ccshirt_media_zoom)
+    .media-gallery--carousel
+    .rad_ccshirt_media_zoom__button:focus-visible {
+    outline: 2px solid #173b2d;
+    outline-offset: 2px;
+  }
+
+  product-component:has(.rad_ccshirt_media_zoom)
+    .media-gallery--carousel
+    .rad_ccshirt_media_zoom__button svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RAD CC media zoom",
+  "tag": null,
+  "presets": [
+    {
+      "name": "RAD CC media zoom"
+    }
+  ]
+}
+{% endschema %}
