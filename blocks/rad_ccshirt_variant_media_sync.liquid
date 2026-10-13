@@ -1,0 +1,134 @@
+{%- doc -%}
+  Keeps the Color option in step with a gallery image that Shopify has assigned
+  to a product variant. This is scoped to the Comfort Colors shirt template.
+{%- enddoc -%}
+
+{%- liquid
+  assign color_option_position = 0
+
+  for product_option in closest.product.options_with_values
+    assign normalized_option_name = product_option.name | downcase
+    if normalized_option_name == 'color' or normalized_option_name == 'colour'
+      assign color_option_position = forloop.index
+      break
+    endif
+  endfor
+-%}
+
+<span
+  class="rad_ccshirt_variant_media_sync"
+  hidden
+  aria-hidden="true"
+  {{ block.shopify_attributes }}
+></span>
+
+<script type="application/json" class="rad_ccshirt_variant_media_sync__map">
+  {
+    {%- assign mapped_media_ids = '|' -%}
+    {%- assign is_first_mapping = true -%}
+    {%- for variant in closest.product.variants -%}
+      {%- if color_option_position > 0 and variant.featured_media != blank -%}
+        {%- assign media_key = '|' | append: variant.featured_media.id | append: '|' -%}
+        {%- unless mapped_media_ids contains media_key -%}
+          {%- liquid
+            case color_option_position
+              when 1
+                assign color_value = variant.option1
+              when 2
+                assign color_value = variant.option2
+              when 3
+                assign color_value = variant.option3
+            endcase
+            assign mapped_media_ids = mapped_media_ids | append: variant.featured_media.id | append: '|'
+          -%}
+          {%- unless is_first_mapping -%},{%- endunless -%}
+          "{{ variant.featured_media.id }}": {{ color_value | json }}
+          {%- assign is_first_mapping = false -%}
+        {%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+  }
+</script>
+
+<script>
+  (() => {
+    const script = document.currentScript;
+    const mapScript = script.previousElementSibling;
+    const productComponent = script.closest('product-component');
+
+    if (!mapScript || !productComponent || productComponent.dataset.radCcshirtVariantMediaSync === 'true') return;
+
+    let mediaToColor;
+    try {
+      mediaToColor = JSON.parse(mapScript.textContent || '{}');
+    } catch {
+      return;
+    }
+
+    if (Object.keys(mediaToColor).length === 0) return;
+
+    productComponent.dataset.radCcshirtVariantMediaSync = 'true';
+
+    const selectColorForMedia = (mediaId) => {
+      const colorValue = mediaToColor[mediaId];
+      if (!colorValue) return;
+
+      const colorInput = Array.from(
+        productComponent.querySelectorAll('variant-picker input[data-option-name]')
+      ).find(
+        (input) =>
+          input instanceof HTMLInputElement &&
+          ['color', 'colour'].includes(input.dataset.optionName?.toLowerCase()) &&
+          input.value === colorValue &&
+          input.dataset.optionAvailable === 'true'
+      );
+
+      if (colorInput instanceof HTMLInputElement && !colorInput.checked) colorInput.click();
+    };
+
+    const getMediaId = (element) => element?.querySelector('[data-media-id]')?.dataset.mediaId;
+
+    productComponent.addEventListener(
+      'click',
+      (event) => {
+        const thumbnail = event.target instanceof Element ? event.target.closest('.slideshow-controls__thumbnail') : null;
+        if (!thumbnail) return;
+
+        const gallery = thumbnail.closest('.media-gallery--carousel');
+        if (!gallery) return;
+
+        const thumbnailImage = thumbnail.querySelector('img');
+        if (!thumbnailImage?.src) return;
+
+        const thumbnailPath = new URL(thumbnailImage.currentSrc || thumbnailImage.src, window.location.origin).pathname;
+        const slide = Array.from(gallery.querySelectorAll('slideshow-slide')).find((candidate) => {
+          const candidateImage = candidate.querySelector('img');
+          if (!candidateImage?.src) return false;
+
+          const candidatePath = new URL(candidateImage.currentSrc || candidateImage.src, window.location.origin).pathname;
+          return candidatePath === thumbnailPath;
+        });
+        const mediaId = getMediaId(slide);
+
+        // Horizon finishes its own thumbnail selection after this event bubbles.
+        // Updating the variant here would reorder the gallery too early, causing
+        // Horizon to apply the original index to the newly ordered slides.
+        window.setTimeout(() => selectColorForMedia(mediaId), 0);
+      },
+      { capture: true }
+    );
+
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "RAD CC variant media sync",
+  "tag": null,
+  "presets": [
+    {
+      "name": "RAD CC variant media sync"
+    }
+  ]
+}
+{% endschema %}

@@ -1,6 +1,6 @@
 {%- doc -%}
-  Applies the mobile product-media inset used by the Comfort Colors shirt
-  template. This marker block is intentionally empty.
+  Applies the mobile product-media inset and single-image behavior used by the
+  Comfort Colors shirt template.
 {%- enddoc -%}
 
 <span
@@ -10,6 +10,29 @@
   {{ block.shopify_attributes }}
 ></span>
 
+<script>
+  (() => {
+    const script = document.currentScript;
+    const productComponent = script.closest('product-component');
+
+    if (!productComponent || productComponent.dataset.radCcshirtMobileMedia === 'true') return;
+
+    productComponent.dataset.radCcshirtMobileMedia = 'true';
+
+    const disableMobileCarousel = () => {
+      productComponent.querySelectorAll('.media-gallery--carousel slideshow-component').forEach((slideshow) => {
+        slideshow.setAttribute('mobile-disabled', '');
+      });
+    };
+
+    disableMobileCarousel();
+
+    // Horizon replaces the media gallery after an explicit Color selection.
+    // Reapply the mobile-only state to the replacement gallery.
+    new MutationObserver(disableMobileCarousel).observe(productComponent, { childList: true, subtree: true });
+  })();
+</script>
+
 {% stylesheet %}
   /* The reference gallery leaves a 16px gutter on both sides at mobile sizes.
      Keep this local to the CC-shirt template rather than changing Horizon's
@@ -17,6 +40,16 @@
   @media screen and (max-width: 749px) {
     product-component:has(.rad_ccshirt_mobile_media) .product-information__media {
       padding-inline: 16px;
+    }
+
+    product-component:has(.rad_ccshirt_mobile_media) .media-gallery--carousel slideshow-slides {
+      overflow-x: hidden;
+      scroll-snap-type: none;
+      touch-action: pan-y;
+    }
+
+    product-component:has(.rad_ccshirt_mobile_media) .media-gallery--carousel slideshow-controls {
+      display: none;
     }
   }
 {% endstylesheet %}

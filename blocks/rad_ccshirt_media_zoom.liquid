@@ -32,17 +32,92 @@
     const script = document.currentScript;
     const button = script.previousElementSibling;
     const productComponent = button?.closest('product-component');
-    const gallery = productComponent?.querySelector('.media-gallery--carousel slideshow-container');
 
-    if (!button || !gallery || button.dataset.radCcshirtMediaZoomMounted === 'true') return;
+    if (!button || !productComponent || button.dataset.radCcshirtMediaZoomMounted === 'true') return;
 
     button.dataset.radCcshirtMediaZoomMounted = 'true';
-    gallery.append(button);
-    button.hidden = false;
+
+    const mountButton = () => {
+      const gallery = productComponent.querySelector('.media-gallery--carousel slideshow-container');
+      if (!gallery || gallery.contains(button)) return;
+
+      gallery.append(button);
+      button.hidden = false;
+    };
+
+    const resetInitialZoom = (dialog) => {
+      dialog.querySelectorAll('.product-media__drag-zoom-wrapper').forEach((wrapper) => {
+        // Horizon opens mobile zoom images at 1.5×. This CC-shirt viewer
+        // shows the complete product mockup at its original scale instead.
+        // `important` keeps Horizon's component from restoring its 1.5×
+        // default after this dialog has opened.
+        wrapper.style.setProperty('--drag-zoom-scale', '1', 'important');
+        wrapper.style.setProperty('--drag-zoom-translate-x', '0px', 'important');
+        wrapper.style.setProperty('--drag-zoom-translate-y', '0px', 'important');
+      });
+    };
+
+    const disableMobileZoomGestures = (dialog) => {
+      if (!window.matchMedia('(max-width: 749px)').matches) return;
+
+      dialog.querySelectorAll('.product-media__drag-zoom-wrapper').forEach((wrapper) => {
+        if (wrapper.dataset.radCcshirtZoomDisabled === 'true') return;
+
+        wrapper.dataset.radCcshirtZoomDisabled = 'true';
+
+        // Capture these events before Horizon's drag-zoom component receives
+        // them. A single tap is still allowed to behave normally.
+        const stopZoomGesture = (event) => {
+          if (event.type === 'touchmove' || event.touches.length > 1) event.preventDefault();
+          event.stopImmediatePropagation();
+        };
+
+        wrapper.addEventListener('touchstart', stopZoomGesture, { capture: true, passive: false });
+        wrapper.addEventListener('touchmove', stopZoomGesture, { capture: true, passive: false });
+        wrapper.addEventListener('touchend', stopZoomGesture, { capture: true, passive: false });
+      });
+    };
+
+    const markZoomDialog = () => {
+      productComponent.querySelectorAll('.dialog-zoomed-gallery__dialog').forEach((dialog) => {
+        dialog.classList.add('rad_ccshirt_media_zoom__dialog');
+
+        if (dialog.dataset.radCcshirtMediaZoomInitialized !== 'true') {
+          dialog.dataset.radCcshirtMediaZoomInitialized = 'true';
+          new MutationObserver(() => {
+            if (dialog.open) {
+              requestAnimationFrame(() => {
+                resetInitialZoom(dialog);
+                disableMobileZoomGestures(dialog);
+              });
+            }
+          }).observe(dialog, { attributes: true, attributeFilter: ['open'] });
+        }
+
+        if (dialog.open) {
+          requestAnimationFrame(() => {
+            resetInitialZoom(dialog);
+            disableMobileZoomGestures(dialog);
+          });
+        }
+      });
+    };
+
+    mountButton();
+    markZoomDialog();
+
+    // Horizon replaces the gallery after a Color is selected.
+    new MutationObserver(() => {
+      mountButton();
+      markZoomDialog();
+    }).observe(productComponent, { childList: true, subtree: true });
 
     button.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
+
+      const gallery = productComponent.querySelector('.media-gallery--carousel slideshow-container');
+      if (!gallery) return;
 
       const activeSlide =
         gallery.querySelector('slideshow-slide[aria-hidden="false"]') || gallery.querySelector('slideshow-slide');
@@ -96,6 +171,75 @@
     stroke: currentColor;
     stroke-width: 1.7;
     stroke-linecap: round;
+  }
+
+  /* The zoom dialog remains swipeable; the duplicate thumbnail rail is not
+     needed on the CC-shirt mobile experience. */
+  .dialog-zoomed-gallery__dialog.rad_ccshirt_media_zoom__dialog .dialog-thumbnails-list-container {
+    display: none !important;
+  }
+
+  .dialog-zoomed-gallery__dialog.rad_ccshirt_media_zoom__dialog {
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    background: #ffffff;
+  }
+
+  .dialog-zoomed-gallery__dialog.rad_ccshirt_media_zoom__dialog::backdrop {
+    background: rgb(23 59 45 / 72%);
+    backdrop-filter: brightness(72%);
+  }
+
+  .dialog-zoomed-gallery__dialog.rad_ccshirt_media_zoom__dialog .dialog-zoomed-gallery__close-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: calc(var(--layer-raised) + 1);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #173b2d;
+    mix-blend-mode: normal;
+    opacity: 1;
+  }
+
+  .dialog-zoomed-gallery__dialog.rad_ccshirt_media_zoom__dialog .dialog-zoomed-gallery__close-button:hover {
+    background: #edf2ee;
+    opacity: 1;
+  }
+
+  .dialog-zoomed-gallery__dialog.rad_ccshirt_media_zoom__dialog .dialog-zoomed-gallery__close-button svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .dialog-zoomed-gallery__dialog.rad_ccshirt_media_zoom__dialog {
+      width: min(calc(100dvw - 48px), 38rem);
+      height: auto;
+      max-height: calc(100dvh - 96px);
+      aspect-ratio: 1;
+      margin: auto;
+    }
+
+    .dialog-zoomed-gallery__dialog.rad_ccshirt_media_zoom__dialog .dialog-zoomed-gallery {
+      height: 100%;
+    }
+
+    .dialog-zoomed-gallery__dialog.rad_ccshirt_media_zoom__dialog
+      .product-media__drag-zoom-wrapper
+      .product-media__image {
+      object-fit: contain;
+    }
+
+    .dialog-zoomed-gallery__dialog.rad_ccshirt_media_zoom__dialog .product-media__drag-zoom-wrapper {
+      touch-action: manipulation;
+      --drag-zoom-scale: 1 !important;
+      --drag-zoom-translate-x: 0px !important;
+      --drag-zoom-translate-y: 0px !important;
+    }
   }
 {% endstylesheet %}
 
