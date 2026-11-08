@@ -147,7 +147,7 @@
       .variant-option--buttons:not(.variant-option--swatches):has(input[data-option-name='Size']) {
       display: grid;
       grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 4px;
+      gap: 6px;
     }
 
     .product-details:has(.rad_ccshirt_option_labels)
@@ -155,10 +155,42 @@
       .variant-option__button-label {
       width: 100%;
       min-width: 0;
-      min-height: 44px;
-      padding: 8px 4px;
+      height: 32px;
+      min-height: 32px;
+      padding: 6px 0;
+      border-radius: 4px;
+      background-color: #ffffff;
+      color: #173b2d;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .product-details:has(.rad_ccshirt_option_labels)
+      .variant-option--buttons:not(.variant-option--swatches):has(input[data-option-name='Size'])
+      .variant-option__button-label::before {
+      border-color: #b9c6bd;
+      border-radius: 4px;
+    }
+
+    .product-details:has(.rad_ccshirt_option_labels)
+      .variant-option--buttons:not(.variant-option--swatches):has(input[data-option-name='Size'])
+      .variant-option__button-label__pill {
+      height: 32px;
+      border-radius: 4px;
+      background-color: #173b2d;
+    }
+
+    .product-details:has(.rad_ccshirt_option_labels)
+      .variant-option--buttons:not(.variant-option--swatches):has(input[data-option-name='Size'])
+      .variant-option__button-label:has(input:checked) {
+      color: #ffffff;
+    }
+
+    .product-details:has(.rad_ccshirt_option_labels)
+      .variant-option--buttons:not(.variant-option--swatches):has(input[data-option-name='Size'])
+      .variant-option__button-label:has(input:checked)::before {
+      border-color: #173b2d;
     }
   }
 {% endstylesheet %}

@@ -34,6 +34,49 @@
       margin-block-end: 4px;
       font-size: 13px;
     }
+
+    /* Match the reference palette: a 32px colour chip inside a 40px
+       circular target, with the selected state drawn inside its boundary. */
+    .product-details:has(.rad_ccshirt_swatch_cursor) .variant-option--swatches {
+      column-gap: 10px;
+      row-gap: 4px;
+    }
+
+    .product-details:has(.rad_ccshirt_swatch_cursor)
+      .variant-option--swatches
+      .variant-option__button-label--has-swatch,
+    .product-details:has(.rad_ccshirt_swatch_cursor)
+      .variant-option--swatches
+      .variant-option__button-label--has-swatch
+      .swatch {
+      width: 40px;
+      height: 40px;
+    }
+
+    .product-details:has(.rad_ccshirt_swatch_cursor)
+      .variant-option--swatches
+      .variant-option__button-label--has-swatch {
+      overflow: visible;
+      outline: none;
+    }
+
+    .product-details:has(.rad_ccshirt_swatch_cursor)
+      .variant-option--swatches
+      .variant-option__button-label--has-swatch
+      .swatch {
+      padding: 3px;
+      border: 1px solid transparent;
+      border-radius: 50%;
+      background-clip: content-box;
+      background-size: 32px 32px;
+    }
+
+    .product-details:has(.rad_ccshirt_swatch_cursor)
+      .variant-option--swatches
+      .variant-option__button-label--has-swatch:has(:checked)
+      .swatch {
+      border-color: #173b2d;
+    }
   }
 
   .product-details:has(.rad_ccshirt_swatch_cursor) .variant-option--swatches .variant-option__swatch-value {
