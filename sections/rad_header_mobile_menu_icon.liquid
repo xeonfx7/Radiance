@@ -1,0 +1,63 @@
+{%- comment -%}
+  Refines the mobile menu trigger without changing Horizon's header markup or
+  icon asset. Included from the header group so it applies store-wide.
+{%- endcomment -%}
+
+<span
+  class="rad_header_mobile_menu_icon"
+  hidden
+  aria-hidden="true"
+  {{ section.shopify_attributes }}
+></span>
+
+{% stylesheet %}
+  @media screen and (max-width: 749px) {
+    .header__icon--summary .header-drawer-icon--open,
+    .header__icon--summary .header-drawer-icon--close {
+      width: 14px;
+      height: 14px;
+      color: #173b2d;
+    }
+
+    /* Horizon's stock icon has two lines. The reference menu uses three. */
+    .header__icon--summary .header-drawer-icon--open {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header__icon--summary .header-drawer-icon--open svg {
+      display: none;
+    }
+
+    .header__icon--summary .header-drawer-icon--open::before {
+      content: '';
+      width: 14px;
+      height: 12px;
+      background: linear-gradient(
+        to bottom,
+        currentColor 0 1.25px,
+        transparent 1.25px 5px,
+        currentColor 5px 6.25px,
+        transparent 6.25px 10px,
+        currentColor 10px 11.25px,
+        transparent 11.25px
+      );
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RAD mobile menu icon",
+  "tag": "div",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "presets": [
+    {
+      "name": "RAD mobile menu icon"
+    }
+  ]
+}
+{% endschema %}
