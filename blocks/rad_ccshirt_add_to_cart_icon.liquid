@@ -23,6 +23,32 @@
     letter-spacing: normal;
     text-transform: none;
   }
+
+  @media screen and (max-width: 749px) {
+    /* Match the reference's compact, forest-green mobile purchase control. */
+    .product-details:has(.rad_ccshirt_add_to_cart_icon) .add-to-cart-button {
+      height: 46px;
+      padding: 10px 15px;
+      border-color: #174632 !important;
+      border-radius: 8px;
+      background-color: #174632 !important;
+      color: #ffffff;
+      font-family: var(--font-body--family);
+      /* Uses the configurable Body font (DM Sans at present), matching the
+         reference's 16px / 700 / 20.8px uppercase treatment. */
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Horizon reserves a 24px stack gap above the button. Keep a 6px break
+       so the full control remains visible below the compact Size row. */
+    .product-details:has(.rad_ccshirt_add_to_cart_icon) .buy-buttons-block {
+      margin-block-start: -18px;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}

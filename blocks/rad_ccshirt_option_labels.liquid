@@ -133,6 +133,15 @@
   }
 
   @media screen and (max-width: 749px) {
+    /* Compact the Color and Size rows, while retaining 44px size targets. */
+    .product-details:has(.rad_ccshirt_option_labels) .variant-option--buttons legend {
+      margin-block-end: 4px;
+    }
+
+    .product-details:has(.rad_ccshirt_option_labels) .variant-option + .variant-option {
+      margin-block-start: 4px;
+    }
+
     /* Match the reference's six compact Size buttons in one row. */
     .product-details:has(.rad_ccshirt_option_labels)
       .variant-option--buttons:not(.variant-option--swatches):has(input[data-option-name='Size']) {
