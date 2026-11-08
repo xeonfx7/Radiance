@@ -1,6 +1,5 @@
 {%- doc -%}
-  Adds a visual zoom affordance to the Comfort Colors shirt product gallery.
-  Horizon's existing image click behavior continues to open the zoom dialog.
+  Refines Horizon's existing product-image zoom dialog for Comfort Colors shirts.
 {%- enddoc -%}
 
 <span
@@ -10,40 +9,15 @@
   {{ block.shopify_attributes }}
 ></span>
 
-<button
-  type="button"
-  class="rad_ccshirt_media_zoom__button"
-  aria-label="{{ 'actions.zoom_media' | t: index: 1 }}"
-  hidden
->
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <circle cx="10" cy="10" r="5.5" />
-    <path d="m14 14 5 5M10 7v6M7 10h6" />
-  </svg>
-</button>
-
 <script>
   (() => {
     const script = document.currentScript;
-    const button = script.previousElementSibling;
-    const productComponent = button?.closest('product-component');
+    const marker = script.previousElementSibling;
+    const productComponent = marker?.closest('product-component');
 
-    if (!button || !productComponent || button.dataset.radCcshirtMediaZoomMounted === 'true') return;
+    if (!marker || !productComponent || marker.dataset.radCcshirtMediaZoomMounted === 'true') return;
 
-    button.dataset.radCcshirtMediaZoomMounted = 'true';
-
-    const mountButton = () => {
-      const gallery = productComponent.querySelector('.media-gallery--carousel slideshow-container');
-      if (!gallery || gallery.contains(button)) return;
-
-      gallery.append(button);
-      button.hidden = false;
-    };
+    marker.dataset.radCcshirtMediaZoomMounted = 'true';
 
     const resetInitialZoom = (dialog) => {
       dialog.querySelectorAll('.product-media__drag-zoom-wrapper').forEach((wrapper) => {
@@ -103,78 +77,17 @@
       });
     };
 
-    mountButton();
     markZoomDialog();
 
     // Horizon replaces the gallery after a Color is selected.
     new MutationObserver(() => {
-      mountButton();
       markZoomDialog();
     }).observe(productComponent, { childList: true, subtree: true });
-
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      const gallery = productComponent.querySelector('.media-gallery--carousel slideshow-container');
-      if (!gallery) return;
-
-      const activeSlide =
-        gallery.querySelector('slideshow-slide[aria-hidden="false"]') || gallery.querySelector('slideshow-slide');
-
-      activeSlide?.click();
-    });
   })();
 </script>
 
 {% stylesheet %}
-  /* A real button triggers Horizon's existing zoom dialog for the active image. */
-  product-component:has(.rad_ccshirt_media_zoom)
-    .media-gallery--carousel
-    slideshow-container
-    .rad_ccshirt_media_zoom__button {
-    position: absolute;
-    right: 12px;
-    bottom: 12px;
-    z-index: 3;
-    display: grid;
-    place-items: center;
-    width: 34px;
-    height: 34px;
-    padding: 0;
-    margin: 0;
-    border: 1px solid #173b2d;
-    border-radius: 50%;
-    background: #ffffff;
-    color: #173b2d;
-    cursor: zoom-in;
-  }
-
-  product-component:has(.rad_ccshirt_media_zoom)
-    .media-gallery--carousel
-    .rad_ccshirt_media_zoom__button:hover {
-    background: #edf2ee;
-  }
-
-  product-component:has(.rad_ccshirt_media_zoom)
-    .media-gallery--carousel
-    .rad_ccshirt_media_zoom__button:focus-visible {
-    outline: 2px solid #173b2d;
-    outline-offset: 2px;
-  }
-
-  product-component:has(.rad_ccshirt_media_zoom)
-    .media-gallery--carousel
-    .rad_ccshirt_media_zoom__button svg {
-    width: 20px;
-    height: 20px;
-    stroke: currentColor;
-    stroke-width: 1.7;
-    stroke-linecap: round;
-  }
-
-  /* The zoom dialog remains swipeable; the duplicate thumbnail rail is not
-     needed on the CC-shirt mobile experience. */
+  /* The duplicate thumbnail rail is not needed on the CC-shirt mobile experience. */
   .dialog-zoomed-gallery__dialog.rad_ccshirt_media_zoom__dialog .dialog-thumbnails-list-container {
     display: none !important;
   }

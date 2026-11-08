@@ -33,12 +33,13 @@
     > .group-block:has(> .group-block-content h1)
     .text-block:has(> h1)
     > h1 {
-    font-family: var(--font-subheading--family);
-    font-style: var(--font-subheading--style);
-    font-weight: var(--font-subheading--weight);
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
     font-size: 2.16rem;
     line-height: 1.15;
     letter-spacing: -0.025em;
+    color: #173b2d;
   }
 
   .product-details:has(.rad_ccshirt_title_style)
@@ -92,6 +93,20 @@
   }
 
   @media screen and (max-width: 749px) {
+    /* The mobile breadcrumb is visually hidden, but its wrapper remains a
+       flex item and adds Horizon's 24px stack gap before the title. Remove
+       that wrapper and set the desired 12px media-to-title separation. */
+    .product-details:has(.rad_ccshirt_title_style) {
+      padding-block-start: 12px;
+    }
+
+    .product-details:has(.rad_ccshirt_title_style)
+      > .group-block
+      > .group-block-content
+      > div:has(.rad_breadcrumbs--embedded) {
+      display: none;
+    }
+
     .product-details:has(.rad_ccshirt_title_style)
       .group-block-content
       > .group-block:has(> .group-block-content h1)

@@ -34,12 +34,17 @@
 </script>
 
 {% stylesheet %}
-  /* The reference gallery leaves a 16px gutter on both sides at mobile sizes.
+  /* The reference gallery leaves a 32px gutter on both sides at mobile sizes.
      Keep this local to the CC-shirt template rather than changing Horizon's
      shared product-media layout. */
   @media screen and (max-width: 749px) {
+    /* The updated reference begins the gallery directly below the header. */
+    .product-information:has(.rad_ccshirt_mobile_media) {
+      padding-block-start: 0;
+    }
+
     product-component:has(.rad_ccshirt_mobile_media) .product-information__media {
-      padding-inline: 16px;
+      padding-inline: 32px;
     }
 
     product-component:has(.rad_ccshirt_mobile_media) .media-gallery--carousel slideshow-slides {
