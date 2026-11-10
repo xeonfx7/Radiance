@@ -98,9 +98,9 @@
     margin: 0 auto;
     padding: var(--padding-md) var(--page-margin);
     font-family: var(--font-body--family);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 400;
-    line-height: 14px;
+    line-height: 16px;
     letter-spacing: normal;
     color: rgb(var(--color-foreground-rgb) / var(--opacity-80));
   }
@@ -108,7 +108,8 @@
   .rad_breadcrumbs--embedded {
     max-width: none;
     margin: 0;
-    padding: 0 0 12px;
+    /* Keep the existing title offset while accommodating the larger label. */
+    padding: 0 0 10px;
   }
 
   @media screen and (max-width: 749px) {

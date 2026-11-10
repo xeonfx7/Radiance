@@ -10,7 +10,15 @@
   {{ block.shopify_attributes }}
 ></span>
 
-{% stylesheet %}
+<style>
+  @font-face {
+    font-family: 'RAD Barlow Condensed';
+    src: url('{{ 'rad-barlow-condensed-800.ttf' | asset_url }}') format('truetype');
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+  }
+
   /* The product-details stack has a 28px block gap. The reference begins the
      title immediately after the breadcrumb's 26px-tall area. */
   .product-details:has(.rad_ccshirt_title_style) .rad_breadcrumbs--embedded {
@@ -47,6 +55,24 @@
     > .group-block:has(> .group-block-content h1)
     h1 {
     margin: 0;
+  }
+
+  /* The reference's related-products heading uses Barlow Condensed 800.
+     Load that face only for this CC-shirt alternate-template heading; the
+     rest of the storefront retains the configured theme fonts. */
+  body:has(.rad_ccshirt_title_style)
+    product-recommendations[data-testid='product-recommendations-section']
+    .text-block:has(> h2)
+    > h2 {
+    margin: 0;
+    color: #173b2d;
+    font-family: 'RAD Barlow Condensed', 'Barlow Condensed', sans-serif;
+    font-style: normal;
+    font-size: clamp(1.75rem, 3.43vw, 3rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
   }
 
   .product-details:has(.rad_ccshirt_title_style)
@@ -189,7 +215,7 @@
       letter-spacing: -0.025em;
     }
   }
-{% endstylesheet %}
+</style>
 
 {% schema %}
 {

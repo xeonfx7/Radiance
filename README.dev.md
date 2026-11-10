@@ -21,10 +21,16 @@ git status --short
 Use Shopify's development theme preview:
 
 ```bash
-shopify theme dev
+./dev.sh
 ```
 
 This uploads your current local files to a hidden development theme and prints preview/theme-editor links. Keep the terminal running while testing.
+
+`dev.sh` is a shorthand for `shopify theme dev` and forwards any extra Shopify CLI arguments, for example:
+
+```bash
+./dev.sh --store your-store.myshopify.com
+```
 
 Preview the custom Comfort Colors shirt template without assigning it live:
 
@@ -187,8 +193,12 @@ Adjust its enable switch and badge colors in the theme editor under **Header →
 
 ## CC-shirt product title
 
-`blocks/rad_ccshirt_title_style.liquid` applies the product-title font, size, tracking, forest-green DM Sans heading style, price styling, and spacing used by the CC-shirt design reference; it leaves a 12px mobile break between the gallery and product details. `blocks/rad_ccshirt_meta.liquid` supplies the matching star-rating row; its optional fabric, cotton, and fit labels are disabled in the CC-shirt template. `blocks/rad_ccshirt_swatch_cursor.liquid` provides color-label styling. `blocks/rad_ccshirt_option_labels.liquid` formats Color and Size as `Color: VALUE` and can add a linked “Find my size” control. `blocks/rad_ccshirt_mobile_media.liquid` starts the mobile gallery directly below the header, gives it a 32px gutter, and disables its swipe carousel; Color swatches choose the main image. `blocks/rad_ccshirt_media_zoom.liquid` keeps Horizon’s image-click viewer constrained with a large close button and no thumbnail rail; it holds the complete mockup at 1× on mobile rather than enabling pinch or double-tap zoom. `blocks/rad_ccshirt_variant_media_sync.liquid` selects the matching Color from an explicit gallery-thumbnail click on larger screens. These are included only in `templates/product.rad_ccshirt.json`, leaving shared Horizon title, price, review, variant-picker, and media-gallery styles unchanged.
+`blocks/rad_ccshirt_title_style.liquid` applies the product-title font, size, tracking, forest-green DM Sans heading style, price styling, related-products H2 styling, and spacing used by the CC-shirt design reference; it leaves a 12px mobile break between the gallery and product details. The related-products H2 loads the local `assets/rad-barlow-condensed-800.ttf` font because the reference uses Barlow Condensed 800; the rest of the storefront stays on the configured theme fonts. `blocks/rad_ccshirt_meta.liquid` supplies the matching star-rating row; its optional fabric, cotton, and fit labels are disabled in the CC-shirt template. `blocks/rad_ccshirt_swatch_cursor.liquid` provides color-label styling. `blocks/rad_ccshirt_option_labels.liquid` formats Color and Size as `Color: VALUE` and can add a linked “Find my size” control. `blocks/rad_ccshirt_mobile_media.liquid` starts the mobile gallery directly below the header, gives it a 32px gutter, and disables its swipe carousel; Color swatches choose the main image. `blocks/rad_ccshirt_gallery_pagination.liquid` removes the desktop thumbnail gallery and the mobile gallery pagination, which Horizon does not expose as a no-pagination setting. `blocks/rad_ccshirt_after_cart.liquid` provides the three product accordions with matching shirt, hanger, and delivery-truck icons plus the compact chevron indicator. `blocks/rad_ccshirt_media_zoom.liquid` keeps Horizon’s image-click viewer constrained with a large close button and no thumbnail rail; it holds the complete mockup at 1× on mobile rather than enabling pinch or double-tap zoom. `blocks/rad_ccshirt_variant_media_sync.liquid` selects the matching Color from an explicit gallery-thumbnail click on larger screens. These are included only in `templates/product.rad_ccshirt.json`, leaving shared Horizon title, price, review, variant-picker, and media-gallery styles unchanged.
 
 ## Mobile menu icon
 
 `sections/rad_header_mobile_menu_icon.liquid` is included in the header group to replace Horizon’s two-line mobile menu glyph with a compact three-line, forest-green icon, without changing Horizon’s shared header or icon assets.
+
+## Desktop menu typography
+
+`sections/rad_header_menu_typography.liquid` is included in the header group to style only the desktop primary menu as 16px DM Sans semibold title case. It also gives a `/collections/sale` menu link the reference red. Keep this section separate from Horizon’s `_header-menu` block when updating the theme.

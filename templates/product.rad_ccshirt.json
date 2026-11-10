@@ -103,6 +103,11 @@
               "settings": {},
               "blocks": {}
             },
+            "rad_ccshirt_gallery_pagination": {
+              "type": "rad_ccshirt_gallery_pagination",
+              "settings": {},
+              "blocks": {}
+            },
             "rad_ccshirt_media_zoom": {
               "type": "rad_ccshirt_media_zoom",
               "settings": {},
@@ -323,11 +328,11 @@
                 "guarantee_text": "Less than 1% of customers use our money back guarantee.",
                 "shipping_text": "Free shipping $85+",
                 "secure_text": "Secure checkout",
-                "about_heading": "ABOUT THIS TEE",
+                "about_heading": "About This Tee",
                 "about_text": "<p>A soft spot for the slow lane. This Comfort Colors 1717 tee brings an easy, lived-in feel to slow hikes, snack stops, and days with no agenda.</p><ul><li>100% ring-spun cotton.</li><li>Heavier fabric, garment-dyed for soft color and a lived-in feel.</li><li>Relaxed unisex fit with room to take it easy.</li></ul>",
-                "care_heading": "KEEP IT LOOKING GOOD",
+                "care_heading": "Keep It Looking Good",
                 "care_items": "Machine wash cold, inside out.\nTumble dry low or hang dry.\nSkip the bleach and keep the iron off the print.",
-                "shipping_heading": "SHIPPING & RETURNS",
+                "shipping_heading": "Shipping & Returns",
                 "shipping_body": "<p>Orders ship within 3-5 days. Allow another 3-5 days after dispatch for delivery. Orders over $85 qualify for free shipping.</p>",
                 "shipping_policy_link": "/policies/shipping-policy",
                 "refund_policy_link": "/policies/refund-policy"
@@ -365,6 +370,7 @@
             "rad_ccshirt_breadcrumbs",
             "rad_ccshirt_title_style",
             "rad_ccshirt_mobile_media",
+            "rad_ccshirt_gallery_pagination",
             "rad_ccshirt_media_zoom",
             "rad_ccshirt_variant_media_sync",
             "group_icgrde",

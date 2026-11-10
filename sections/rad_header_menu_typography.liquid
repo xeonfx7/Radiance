@@ -1,0 +1,46 @@
+{%- comment -%}
+  Matches the desktop menu typography to the CC-shirt design reference without
+  modifying Horizon's shared header/menu files.
+{%- endcomment -%}
+
+<span class="rad_header_menu_typography" hidden aria-hidden="true"></span>
+
+{% stylesheet %}
+  @media screen and (min-width: 750px) {
+    body:has(.rad_header_menu_typography) #header-component .header-menu .menu-list {
+      /* These variables are set inline by Horizon's menu block, so this
+         update-safe override needs !important rather than a core-file edit. */
+      --menu-top-level-font-family: var(--font-subheading--family) !important;
+      --menu-top-level-font-style: var(--font-subheading--style) !important;
+      --menu-top-level-font-weight: var(--font-subheading--weight) !important;
+      --menu-top-level-font-size-desktop: 1rem !important;
+      --menu-top-level-font-line-height: 1.4 !important;
+      --menu-top-level-font-case: none !important;
+      --menu-top-level-font-color: #173b2d !important;
+      --menu-top-level-font-color-rgb: 23, 59, 45 !important;
+    }
+
+    body:has(.rad_header_menu_typography)
+      #header-component
+      .header-menu
+      a.menu-list__link[href*='/collections/sale'] {
+      --menu-top-level-font-color: #b72c28;
+      --menu-top-level-font-color-rgb: 183, 44, 40;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RAD desktop menu type",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [],
+  "presets": [
+    {
+      "name": "RAD desktop menu type"
+    }
+  ]
+}
+{% endschema %}

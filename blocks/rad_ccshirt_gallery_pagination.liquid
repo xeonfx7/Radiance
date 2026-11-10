@@ -1,0 +1,35 @@
+{%- doc -%}
+  Removes product-media pagination only when this marker is included in the
+  Comfort Colors alternate product template.
+{%- enddoc -%}
+
+<span
+  class="rad_ccshirt_gallery_pagination"
+  hidden
+  aria-hidden="true"
+  {{ block.shopify_attributes }}
+></span>
+
+{% stylesheet %}
+  /* Horizon's product gallery does not provide a "none" pagination setting.
+     Hide its control component only for the alternate CC-shirt template;
+     swatches and the existing image-viewer continue to work. */
+  product-component:has(.rad_ccshirt_gallery_pagination)
+    .product-information__media
+    slideshow-controls {
+    display: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "RAD CC gallery pagination",
+  "tag": null,
+  "settings": [],
+  "presets": [
+    {
+      "name": "RAD CC gallery pagination"
+    }
+  ]
+}
+{% endschema %}

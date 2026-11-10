@@ -67,7 +67,14 @@
       class="rad_ccshirt_after_cart__details"
     >
       <summary class="rad_ccshirt_after_cart__summary">
-        <span>{{ block.settings.about_heading }}</span>
+        <span class="rad_ccshirt_after_cart__summary_label">
+          <span class="rad_ccshirt_after_cart__summary_icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" focusable="false">
+              <path d="m8 3-5 3 2 4 2-1v12h10V9l2 1 2-4-5-3a4 4 0 0 1-8 0z" />
+            </svg>
+          </span>
+          <span>{{ block.settings.about_heading }}</span>
+        </span>
         <span
           class="rad_ccshirt_after_cart__toggle"
           aria-hidden="true"
@@ -80,7 +87,14 @@
 
     <details class="rad_ccshirt_after_cart__details">
       <summary class="rad_ccshirt_after_cart__summary">
-        <span>{{ block.settings.care_heading }}</span>
+        <span class="rad_ccshirt_after_cart__summary_label">
+          <span class="rad_ccshirt_after_cart__summary_icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" focusable="false">
+              <path d="M12 8.5V8a2 2 0 1 0-2-2M12 8.5 2.8 15.6c-.8.6-.4 1.9.6 1.9h17.2c1 0 1.4-1.3.6-1.9z" />
+            </svg>
+          </span>
+          <span>{{ block.settings.care_heading }}</span>
+        </span>
         <span
           class="rad_ccshirt_after_cart__toggle"
           aria-hidden="true"
@@ -100,7 +114,14 @@
 
     <details class="rad_ccshirt_after_cart__details">
       <summary class="rad_ccshirt_after_cart__summary">
-        <span>{{ block.settings.shipping_heading }}</span>
+        <span class="rad_ccshirt_after_cart__summary_label">
+          <span class="rad_ccshirt_after_cart__summary_icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" focusable="false">
+              <path d="M2 6h12v10H2zM14 10h4l3 3v3h-7zM6 18.5a1.5 1.5 0 1 0 0-.01M17 18.5a1.5 1.5 0 1 0 0-.01" />
+            </svg>
+          </span>
+          <span>{{ block.settings.shipping_heading }}</span>
+        </span>
         <span
           class="rad_ccshirt_after_cart__toggle"
           aria-hidden="true"
@@ -194,12 +215,14 @@
     height: 60px;
     padding: 0;
     cursor: pointer;
-    font-family: var(--font-body--family);
-    font-size: 0.8125rem;
-    font-weight: 700;
-    line-height: 1.5;
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-size: 1rem;
+    font-weight: var(--font-heading--weight);
+    line-height: 1.2;
     letter-spacing: normal;
-    text-transform: uppercase;
+    text-transform: none;
+    color: #173b2d;
     list-style: none;
   }
 
@@ -207,31 +230,41 @@
     display: none;
   }
 
-  .rad_ccshirt_after_cart__toggle {
-    position: relative;
-    width: 11px;
-    height: 20px;
+  .rad_ccshirt_after_cart__summary_label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .rad_ccshirt_after_cart__summary_icon {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
     flex: 0 0 auto;
   }
 
-  .rad_ccshirt_after_cart__toggle::before,
-  .rad_ccshirt_after_cart__toggle::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
+  .rad_ccshirt_after_cart__summary_icon svg {
     width: 100%;
-    height: 1.5px;
-    background: currentColor;
-    transform: translateY(-50%);
+    height: 100%;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
-  .rad_ccshirt_after_cart__toggle::after {
-    transform: translateY(-50%) rotate(90deg);
+  .rad_ccshirt_after_cart__toggle {
+    width: 8px;
+    height: 8px;
+    margin-inline-end: 2px;
+    flex: 0 0 auto;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
   }
 
-  .rad_ccshirt_after_cart__details[open] .rad_ccshirt_after_cart__toggle::after {
-    display: none;
+  .rad_ccshirt_after_cart__details[open] .rad_ccshirt_after_cart__toggle {
+    transform: rotate(225deg);
   }
 
   .rad_ccshirt_after_cart__content {
@@ -241,6 +274,18 @@
     font-size: 0.9375rem;
     font-weight: var(--font-body--weight);
     line-height: 1.65;
+  }
+
+  /* The product description is the next block in the CC-shirt template.
+     Match its body copy to the custom accordion content without changing
+     Horizon's shared text block. */
+  .rad_ccshirt_after_cart + rte-formatter.text-block {
+    font-family: var(--font-body--family);
+    font-style: var(--font-body--style);
+    font-size: 0.9375rem;
+    font-weight: var(--font-body--weight);
+    line-height: 1.65;
+    letter-spacing: normal;
   }
 
   .rad_ccshirt_after_cart__content > :first-child {

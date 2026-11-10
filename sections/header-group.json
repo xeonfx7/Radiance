@@ -47,6 +47,10 @@
       "type": "rad_header_mobile_menu_icon",
       "settings": {}
     },
+    "rad_header_menu_typography": {
+      "type": "rad_header_menu_typography",
+      "settings": {}
+    },
     "header_section": {
       "type": "header",
       "blocks": {
@@ -142,6 +146,7 @@
   "order": [
     "header_announcements_9jGBFp",
     "rad_header_mobile_menu_icon",
+    "rad_header_menu_typography",
     "header_section",
     "rad_cart_alert"
   ]
